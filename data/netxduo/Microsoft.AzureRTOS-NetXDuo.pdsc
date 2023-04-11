@@ -1,0 +1,1581 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<package schemaVersion="1.7.7" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Open-CMSIS-Pack/Open-CMSIS-Pack-Spec/v1.7.7/schema/PACK.xsd">
+	
+	<vendor>Microsoft</vendor>
+	<name>AzureRTOS-NetXDuo</name>
+	<description>CMSIS-Pack for Azure RTOS NetX Duo</description>
+	<url>https://github.com/azure-rtos/packs/</url>
+
+	<releases>
+		<release version="1.0.0" date="2023-01-22">
+			Initial release of Azure RTOS NetX Duo CMSIS-PACK.
+            - Based on Azure RTOS NetX Duo release v6.2.0.
+            - Included netxduo common code, addons, nx_secure and crypto_libraries.
+            - Support Cortex-M0/M3/M4/M7/M23/M33/M55/M85
+            - Support Cortex-A5/A7/A8/A9/A15
+            - Support Cortex-R4/R5
+		</release>
+	</releases>
+  
+    <keywords>
+        <keyword>Microsoft</keyword>
+        <keyword>Azure RTOS</keyword>
+		<keyword>NetX Duo</keyword>
+        <keyword>NetX Crypto</keyword>
+        <keyword>NetX Secure</keyword>
+    </keywords>
+
+    <conditions>
+
+		<!--CM0 Condition-->
+        <condition id="CM0 IAR Condition">
+            <description>CortexM0 / IAR compiler</description>
+            <require Tcompiler="IAR"/>
+            <require Dcore="Cortex-M0"/>
+        </condition>
+        <condition id="CM0 GNU Condition">
+            <description>CortexM0 / GNU compiler</description>
+            <require Tcompiler="GCC"/>
+            <require Dcore="Cortex-M0"/>
+        </condition>
+        <condition id="CM0 ARMC5 Condition">
+            <description>CortexM0 / ARM compiler 5</description>
+            <require Tcompiler="ARMCC"/>
+            <require Dcore="Cortex-M0"/>
+        </condition>
+
+		<!--CM3 Condition-->
+        <condition id="CM3 IAR Condition">
+            <description>CortexM3 / IAR compiler</description>
+            <require Tcompiler="IAR"/>
+            <require Dcore="Cortex-M3"/>
+        </condition>
+        <condition id="CM3 GNU Condition">
+            <description>CortexM3 / GNU compiler</description>
+            <require Tcompiler="GCC"/>
+            <require Dcore="Cortex-M3"/>
+        </condition>
+        <condition id="CM3 ARMC6 Condition">
+            <description>CortexM3 / ARM compiler 6</description>
+            <require Tcompiler="ARMCC"/>
+            <require Dcore="Cortex-M3"/>
+        </condition>
+
+		<!--CM4 Condition-->
+        <condition id="CM4 IAR Condition">
+            <description>CortexM4 / IAR compiler</description>
+            <require Tcompiler="IAR"/>
+            <require Dcore="Cortex-M4"/>
+        </condition>
+        <condition id="CM4 GNU Condition">
+            <description>CortexM4 / GNU compiler</description>
+            <require Tcompiler="GCC"/>
+            <require Dcore="Cortex-M4"/>
+        </condition>
+        <condition id="CM4 ARMC6 Condition">
+            <description>CortexM4 / ARM compiler 6</description>
+            <require Tcompiler="ARMCC"/>
+            <require Dcore="Cortex-M4"/>
+        </condition>
+
+        <!--CM7 Condition-->
+        <condition id="CM7 IAR Condition">
+            <description>CortexM7 / IAR compiler</description>
+            <require Tcompiler="IAR"/>
+            <require Dcore="Cortex-M7"/>
+        </condition>
+        <condition id="CM7 GNU Condition">
+            <description>CortexM7 / GNU compiler</description>
+            <require Tcompiler="GCC"/>
+            <require Dcore="Cortex-M7"/>
+        </condition>
+        <condition id="CM7 ARMC6 Condition">
+            <description>CortexM7 / ARM compiler 6</description>
+            <require Tcompiler="ARMCC"/>
+            <require Dcore="Cortex-M7"/>
+        </condition>
+
+		<!--CM23 Condition-->
+        <condition id="CM23 IAR Condition">
+            <description>CortexM23 / IAR compiler</description>
+            <require Tcompiler="IAR"/>
+            <require Dcore="Cortex-M23"/>
+        </condition>
+        <condition id="CM23 GNU Condition">
+            <description>CortexM23 / GNU compiler</description>
+            <require Tcompiler="GCC"/>
+            <require Dcore="Cortex-M23"/>
+        </condition>
+        <condition id="CM23 ARMC5 Condition">
+            <description>CortexM23 / ARM compiler 5</description>
+            <require Tcompiler="ARMCC"/>
+            <require Dcore="Cortex-M23"/>
+        </condition>
+
+		<!--CM33 Condition-->
+        <condition id="CM33 IAR Condition">
+            <description>CortexM33 / IAR compiler</description>
+            <require Tcompiler="IAR"/>
+            <require Dcore="Cortex-M33"/>
+        </condition>
+        <condition id="CM33 GNU Condition">
+            <description>CortexM33 / GNU compiler</description>
+            <require Tcompiler="GCC"/>
+            <require Dcore="Cortex-M33"/>
+        </condition>
+        <condition id="CM33 ARMC6 Condition">
+            <description>CortexM33 / ARM compiler 6</description>
+            <require Tcompiler="ARMCC"/>
+            <require Dcore="Cortex-M33"/>
+        </condition>
+
+		<!--CM55 Condition-->
+        <condition id="CM55 IAR Condition">
+            <description>CortexM55 / IAR compiler</description>
+            <require Tcompiler="IAR"/>
+            <require Dcore="Cortex-M55"/>
+        </condition>
+        <condition id="CM55 GNU Condition">
+            <description>CortexM55 / GNU compiler</description>
+            <require Tcompiler="GCC"/>
+            <require Dcore="Cortex-M55"/>
+        </condition>
+        <condition id="CM55 ARMC6 Condition">
+            <description>CortexM55 / ARM compiler 6</description>
+            <require Tcompiler="ARMCC"/>
+            <require Dcore="Cortex-M55"/>
+        </condition>
+
+		<!--CM85 Condition-->
+        <condition id="CM85 IAR Condition">
+            <description>CortexM85 / IAR compiler</description>
+            <require Tcompiler="IAR"/>
+            <require Dcore="Cortex-M85"/>
+        </condition>
+        <condition id="CM85 GNU Condition">
+            <description>CortexM85 / GNU compiler</description>
+            <require Tcompiler="GCC"/>
+            <require Dcore="Cortex-M85"/>
+        </condition>
+        <condition id="CM85 ARMC6 Condition">
+            <description>CortexM85 / ARM compiler 6</description>
+            <require Tcompiler="ARMCC"/>
+            <require Dcore="Cortex-M85"/>
+        </condition>
+
+		<!--CA5 Condition-->
+        <condition id="CA5 IAR Condition">
+            <description>Cortex-A5 / IAR compiler</description>
+            <require Tcompiler="IAR"/>
+            <require Dcore="Cortex-A5"/>
+        </condition>
+        <condition id="CA5 GNU Condition">
+            <description>Cortex-A5 / GNU compiler</description>
+            <require Tcompiler="GCC"/>
+            <require Dcore="Cortex-A5"/>
+        </condition>
+        <condition id="CA5 ARMC5 Condition">
+            <description>Cortex-A5 / ARM compiler 5</description>
+            <require Tcompiler="ARMCC"/>
+            <require Dcore="Cortex-A5"/>
+        </condition>
+
+		<!--CA7 Condition-->
+        <condition id="CA7 IAR Condition">
+            <description>Cortex-A7 / IAR compiler</description>
+            <require Tcompiler="IAR"/>
+            <require Dcore="Cortex-A7"/>
+        </condition>
+        <condition id="CA7 GNU Condition">
+            <description>Cortex-A7 / GNU compiler</description>
+            <require Tcompiler="GCC"/>
+            <require Dcore="Cortex-A7"/>
+        </condition>
+        <condition id="CA7 ARMC5 Condition">
+            <description>Cortex-A7 / ARM compiler 5</description>
+            <require Tcompiler="ARMCC"/>
+            <require Dcore="Cortex-A7"/>
+        </condition>
+
+		<!--CA8 Condition-->
+        <condition id="CA8 IAR Condition">
+            <description>Cortex-A8 / IAR compiler</description>
+            <require Tcompiler="IAR"/>
+            <require Dcore="Cortex-A8"/>
+        </condition>
+        <condition id="CA8 GNU Condition">
+            <description>Cortex-A8 / GNU compiler</description>
+            <require Tcompiler="GCC"/>
+            <require Dcore="Cortex-A8"/>
+        </condition>
+        <condition id="CA8 ARMC5 Condition">
+            <description>Cortex-A8 / ARM compiler 5</description>
+            <require Tcompiler="ARMCC"/>
+            <require Dcore="Cortex-A8"/>
+        </condition>
+
+		<!--CA9 Condition-->
+        <condition id="CA9 IAR Condition">
+            <description>Cortex-A9 / IAR compiler</description>
+            <require Tcompiler="IAR"/>
+            <require Dcore="Cortex-A9"/>
+        </condition>
+        <condition id="CA9 GNU Condition">
+            <description>Cortex-A9 / GNU compiler</description>
+            <require Tcompiler="GCC"/>
+            <require Dcore="Cortex-A9"/>
+        </condition>
+        <condition id="CA9 ARMC5 Condition">
+            <description>Cortex-A9 / ARM compiler 5</description>
+            <require Tcompiler="ARMCC"/>
+            <require Dcore="Cortex-A9"/>
+        </condition>
+
+		<!--CA15 Condition-->
+        <condition id="CA15 GNU Condition">
+            <description>Cortex-A15 / GNU compiler</description>
+            <require Tcompiler="GCC"/>
+            <require Dcore="Cortex-A15"/>
+        </condition>
+
+		<!--CR4 Condition-->
+        <condition id="CR4 IAR Condition">
+            <description>Cortex-R4 / IAR compiler</description>
+            <require Tcompiler="IAR"/>
+            <require Dcore="Cortex-R4"/>
+        </condition>
+        <condition id="CR4 GNU Condition">
+            <description>Cortex-R4 / GNU compiler</description>
+            <require Tcompiler="GCC"/>
+            <require Dcore="Cortex-R4"/>
+        </condition>
+        <condition id="CR4 ARMC6 Condition">
+            <description>Cortex-R4 / ARM compiler 6</description>
+            <require Tcompiler="ARMCC"/>
+            <require Dcore="Cortex-R4"/>
+        </condition>
+
+		<!--CR5 Condition-->
+        <condition id="CR5 IAR Condition">
+            <description>Cortex-R5 / IAR compiler</description>
+            <require Tcompiler="IAR"/>
+            <require Dcore="Cortex-R5"/>
+        </condition>
+        <condition id="CR5 GNU Condition">
+            <description>Cortex-R5 / GNU compiler</description>
+            <require Tcompiler="GCC"/>
+            <require Dcore="Cortex-R5"/>
+        </condition>
+        <condition id="CR5 ARMC5 Condition">
+            <description>Cortex-R5 / ARM compiler 5</description>
+            <require Tcompiler="ARMCC"/>
+            <require Dcore="Cortex-R5"/>
+        </condition>
+
+        <condition id="NXD Common Condition">
+            <description>NXD Common Condition</description>
+            <require Cclass="Network" Cgroup="NetXDuo Common" Csub="NetXDuo Common"/>
+        </condition>
+
+        <condition id="NXD DHCP Server Condition">
+            <description>NXD DHCP Server Condition</description>
+            <require Cclass="Network" Cgroup="NetXDuo Common" Csub="NetXDuo Common"/>
+            <deny Cclass="Network" Cgroup="NetXDuo" Csub="DHCP Client"/>
+        </condition>
+
+        <condition id="NXD DHCP Client Condition">
+            <description>NXD DHCP Client Condition</description>
+            <require Cclass="Network" Cgroup="NetXDuo Common" Csub="NetXDuo Common"/>
+            <deny Cclass="Network" Cgroup="Addons" Csub="DHCP Server"/>
+        </condition>
+
+        <condition id="NXD FTP Server Condition">
+            <description>NXD FTP Server Condition</description>
+            <require Cclass="Network" Cgroup="NetXDuo Common" Csub="NetXDuo Common"/>
+            <deny Cclass="Network" Cgroup="Addons" Csub="FTP Client"/>
+        </condition>
+
+        <condition id="NXD FTP Client Condition">
+            <description>NXD FTP Client Condition</description>
+            <require Cclass="Network" Cgroup="NetXDuo Common" Csub="NetXDuo Common"/>
+            <deny Cclass="Network" Cgroup="Addons" Csub="FTP Server"/>
+        </condition>
+
+        <condition id="NXD HTTP Server Condition">
+            <description>NXD HTTP Server Condition</description>
+            <require Cclass="Network" Cgroup="NetXDuo Common" Csub="NetXDuo Common"/>
+            <deny Cclass="Network" Cgroup="Addons" Csub="HTTP Client"/>
+        </condition>
+
+        <condition id="NXD HTTP Client Condition">
+            <description>NXD HTTP Client Condition</description>
+            <require Cclass="Network" Cgroup="NetXDuo Common" Csub="NetXDuo Common"/>
+            <deny Cclass="Network" Cgroup="Addons" Csub="HTTP Server"/>
+        </condition>
+
+        <condition id="NXD PPPOE Server Condition">
+            <description>NXD PPPOE Server Condition</description>
+            <require Cclass="Network" Cgroup="NetXDuo Common" Csub="NetXDuo Common"/>
+            <deny Cclass="Network" Cgroup="Addons" Csub="PPPOE Client"/>
+        </condition>
+
+        <condition id="NXD PPPOE Client Condition">
+            <description>NXD HTTP Client Condition</description>
+            <require Cclass="Network" Cgroup="NetXDuo Common" Csub="NetXDuo Common"/>
+            <deny Cclass="Network" Cgroup="Addons" Csub="PPPOE Server"/>
+        </condition>
+
+        <condition id="NXD TELNET Server Condition">
+            <description>NXD TELNET Server Condition</description>
+            <require Cclass="Network" Cgroup="NetXDuo Common" Csub="NetXDuo Common"/>
+            <deny Cclass="Network" Cgroup="Addons" Csub="TELNET Client"/>
+        </condition>
+
+        <condition id="NXD TELNET Client Condition">
+            <description>NXD TELNET Client Condition</description>
+            <require Cclass="Network" Cgroup="NetXDuo Common" Csub="NetXDuo Common"/>
+            <deny Cclass="Network" Cgroup="Addons" Csub="TELNET Server"/>
+        </condition>
+
+        <condition id="NXD TFTP Server Condition">
+            <description>NXD TFTP Server Condition</description>
+            <require Cclass="Network" Cgroup="NetXDuo Common" Csub="NetXDuo Common"/>
+            <deny Cclass="Network" Cgroup="Addons" Csub="TFTP Client"/>
+        </condition>
+
+        <condition id="NXD TFTP Client Condition">
+            <description>NXD TFTP Client Condition</description>
+            <require Cclass="Network" Cgroup="NetXDuo Common" Csub="NetXDuo Common"/>
+            <deny Cclass="Network" Cgroup="Addons" Csub="TFTP Server"/>
+        </condition>
+
+        <condition id="NXD Web Server Condition">
+            <description>NXD Web Server Condition</description>
+            <require Cclass="Network" Cgroup="NetXDuo Common" Csub="NetXDuo Common"/>
+            <deny Cclass="Network" Cgroup="Addons" Csub="Web Client"/>
+        </condition>
+
+        <condition id="NXD Web Client Condition">
+            <description>NXD Web Client Condition</description>
+            <require Cclass="Network" Cgroup="NetXDuo Common" Csub="NetXDuo Common"/>
+            <deny Cclass="Network" Cgroup="Addons" Csub="Web Server"/>
+        </condition>
+
+        <condition id="NX_SECURE Condition">
+            <description>NX_SECURE TLS/DTLS Condition</description>
+            <require Cclass="Network" Cgroup="NetX Crypto" Csub="NetX Crypto"/>
+            <require Cclass="Network" Cgroup="NetXDuo Common" Csub="NetXDuo Common"/>
+        </condition>
+    </conditions>
+
+    <components>
+        <bundle Cbundle="NetXDuo" Cclass="Network" Cversion="6.2.0">
+            <description>Azure RTOS netxduo bundle.</description>
+            <doc>../README.md</doc>
+            <component Cgroup="NetXDuo Common" Csub="NetXDuo Common" maxInstances="1">
+                <description>NXD Common</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="common/inc/"/>
+
+                    <!-- Cortex-M porting files -->
+                    <file category="include" condition="CM0 IAR Condition"   name="ports/cortex_m0/iar/inc/"/>
+                    <file category="include" condition="CM0 GNU Condition"   name="ports/cortex_m0/gnu/inc/"/>
+                    <file category="include" condition="CM0 ARMC5 Condition" name="ports/cortex_m0/ac5/inc/"/>
+
+                    <file category="include" condition="CM3 IAR Condition"   name="ports/cortex_m3/iar/inc/"/>
+                    <file category="include" condition="CM3 GNU Condition"   name="ports/cortex_m3/gnu/inc/"/>
+                    <file category="include" condition="CM3 ARMC6 Condition" name="ports/cortex_m3/keil/inc/"/>
+
+                    <file category="include" condition="CM4 IAR Condition"   name="ports/cortex_m4/iar/inc/"/>
+                    <file category="include" condition="CM4 GNU Condition"   name="ports/cortex_m4/gnu/inc/"/>
+                    <file category="include" condition="CM4 ARMC6 Condition" name="ports/cortex_m4/keil/inc/"/>
+
+                    <file category="include" condition="CM7 IAR Condition"   name="ports/cortex_m7/iar/inc/"/>
+                    <file category="include" condition="CM7 GNU Condition"   name="ports/cortex_m7/gnu/inc/"/>
+                    <file category="include" condition="CM7 ARMC6 Condition" name="ports/cortex_m7/ac6/inc/"/>
+
+                    <file category="include" condition="CM23 IAR Condition"   name="ports/cortex_m23/iar/inc/"/>
+                    <file category="include" condition="CM23 GNU Condition"   name="ports/cortex_m23/gnu/inc/"/>
+                    <file category="include" condition="CM23 ARMC5 Condition" name="ports/cortex_m23/ac5/inc/"/>
+
+                    <file category="include" condition="CM33 IAR Condition"   name="ports/cortex_m33/iar/inc/"/>
+                    <file category="include" condition="CM33 GNU Condition"   name="ports/cortex_m33/gnu/inc/"/>
+                    <file category="include" condition="CM33 ARMC6 Condition" name="ports/cortex_m33/ac6/inc/"/>
+
+                    <file category="include" condition="CM55 IAR Condition"   name="ports/cortex_m55/iar/inc/"/>
+                    <file category="include" condition="CM55 GNU Condition"   name="ports/cortex_m55/gnu/inc/"/>
+                    <file category="include" condition="CM55 ARMC6 Condition" name="ports/cortex_m55/ac6/inc/"/>
+
+                    <file category="include" condition="CM85 IAR Condition"   name="ports/cortex_m85/iar/inc/"/>
+                    <file category="include" condition="CM85 GNU Condition"   name="ports/cortex_m85/gnu/inc/"/>
+                    <file category="include" condition="CM85 ARMC6 Condition" name="ports/cortex_m85/ac6/inc/"/>
+
+                    <!-- Cortex-A porting files -->
+                    <file category="include" condition="CA5 IAR Condition"   name="ports/cortex_a5/iar/inc/"/>
+                    <file category="include" condition="CA5 GNU Condition"   name="ports/cortex_a5/gnu/inc/"/>
+                    <file category="include" condition="CA5 ARMC5 Condition" name="ports/cortex_a5/ac5/inc/"/>
+
+                    <file category="include" condition="CA7 IAR Condition"   name="ports/cortex_a7/iar/inc/"/>
+                    <file category="include" condition="CA7 GNU Condition"   name="ports/cortex_a7/gnu/inc/"/>
+                    <file category="include" condition="CA7 ARMC5 Condition" name="ports/cortex_a7/ac5/inc/"/>
+
+                    <file category="include" condition="CA8 IAR Condition"   name="ports/cortex_a8/iar/inc/"/>
+                    <file category="include" condition="CA8 GNU Condition"   name="ports/cortex_a8/gnu/inc/"/>
+                    <file category="include" condition="CA8 ARMC5 Condition" name="ports/cortex_a8/ac5/inc/"/>
+
+                    <file category="include" condition="CA9 IAR Condition"   name="ports/cortex_a9/iar/inc/"/>
+                    <file category="include" condition="CA9 GNU Condition"   name="ports/cortex_a9/gnu/inc/"/>
+                    <file category="include" condition="CA9 ARMC5 Condition" name="ports/cortex_a9/ac5/inc/"/>
+
+                    <file category="include" condition="CA15 GNU Condition"   name="ports/cortex_a15/gnu/inc/"/>
+
+                    <!-- Cortex-R porting files -->
+                    <file category="include" condition="CR4 IAR Condition"   name="ports/cortex_r4/iar/inc/"/>
+                    <file category="include" condition="CR4 GNU Condition"   name="ports/cortex_r4/gnu/inc/"/>
+                    <file category="include" condition="CR4 ARMC6 Condition" name="ports/cortex_r4/ac6/inc/"/>
+
+                    <file category="include" condition="CR5 IAR Condition"   name="ports/cortex_a5/iar/inc/"/>
+                    <file category="include" condition="CR5 GNU Condition"   name="ports/cortex_a5/gnu/inc/"/>
+                    <file category="include" condition="CR5 ARMC5 Condition" name="ports/cortex_a5/ac5/inc/"/>
+
+                    <!-- NetX Duo Common files (504 files in total) -->
+                    <file category="source" name="common/src/nx_arp_announce_send.c"/>
+                    <file category="source" name="common/src/nx_arp_dynamic_entries_invalidate.c"/>
+                    <file category="source" name="common/src/nx_arp_dynamic_entry_delete.c"/>
+                    <file category="source" name="common/src/nx_arp_dynamic_entry_set.c"/>
+                    <file category="source" name="common/src/nx_arp_enable.c"/>
+                    <file category="source" name="common/src/nx_arp_entry_allocate.c"/>
+                    <file category="source" name="common/src/nx_arp_entry_delete.c"/>
+                    <file category="source" name="common/src/nx_arp_gratuitous_send.c"/>
+                    <file category="source" name="common/src/nx_arp_hardware_address_find.c"/>
+                    <file category="source" name="common/src/nx_arp_info_get.c"/>
+                    <file category="source" name="common/src/nx_arp_initialize.c"/>
+                    <file category="source" name="common/src/nx_arp_interface_entries_delete.c"/>
+                    <file category="source" name="common/src/nx_arp_ip_address_find.c"/>
+                    <file category="source" name="common/src/nx_arp_packet_deferred_receive.c"/>
+                    <file category="source" name="common/src/nx_arp_packet_receive.c"/>
+                    <file category="source" name="common/src/nx_arp_packet_send.c"/>
+                    <file category="source" name="common/src/nx_arp_periodic_update.c"/>
+                    <file category="source" name="common/src/nx_arp_probe_send.c"/>
+                    <file category="source" name="common/src/nx_arp_queue_process.c"/>
+                    <file category="source" name="common/src/nx_arp_queue_send.c"/>
+                    <file category="source" name="common/src/nx_arp_static_entries_delete.c"/>
+                    <file category="source" name="common/src/nx_arp_static_entry_create.c"/>
+                    <file category="source" name="common/src/nx_arp_static_entry_delete.c"/>
+                    <file category="source" name="common/src/nx_arp_static_entry_delete_internal.c"/>
+                    <file category="source" name="common/src/nx_http_proxy_client.c"/>
+                    <file category="source" name="common/src/nx_icmp_cleanup.c"/>
+                    <file category="source" name="common/src/nx_icmp_enable.c"/>
+                    <file category="source" name="common/src/nx_icmp_info_get.c"/>
+                    <file category="source" name="common/src/nx_icmp_interface_ping.c"/>
+                    <file category="source" name="common/src/nx_icmp_interface_ping6.c"/>
+                    <file category="source" name="common/src/nx_icmp_packet_process.c"/>
+                    <file category="source" name="common/src/nx_icmp_packet_receive.c"/>
+                    <file category="source" name="common/src/nx_icmp_ping.c"/>
+                    <file category="source" name="common/src/nx_icmp_ping6.c"/>
+                    <file category="source" name="common/src/nx_icmp_queue_process.c"/>
+                    <file category="source" name="common/src/nx_icmpv4_packet_process.c"/>
+                    <file category="source" name="common/src/nx_icmpv4_process_echo_reply.c"/>
+                    <file category="source" name="common/src/nx_icmpv4_process_echo_request.c"/>
+                    <file category="source" name="common/src/nx_icmpv4_send_error_message.c"/>
+                    <file category="source" name="common/src/nx_icmpv6_DAD_clear_NDCache_entry.c"/>
+                    <file category="source" name="common/src/nx_icmpv6_DAD_failure.c"/>
+                    <file category="source" name="common/src/nx_icmpv6_dest_table_add.c"/>
+                    <file category="source" name="common/src/nx_icmpv6_dest_table_find.c"/>
+                    <file category="source" name="common/src/nx_icmpv6_destination_table_periodic_update.c"/>
+                    <file category="source" name="common/src/nx_icmpv6_packet_process.c"/>
+                    <file category="source" name="common/src/nx_icmpv6_perform_DAD.c"/>
+                    <file category="source" name="common/src/nx_icmpv6_process_echo_reply.c"/>
+                    <file category="source" name="common/src/nx_icmpv6_process_echo_request.c"/>
+                    <file category="source" name="common/src/nx_icmpv6_process_na.c"/>
+                    <file category="source" name="common/src/nx_icmpv6_process_ns.c"/>
+                    <file category="source" name="common/src/nx_icmpv6_process_packet_too_big.c"/>
+                    <file category="source" name="common/src/nx_icmpv6_process_ra.c"/>
+                    <file category="source" name="common/src/nx_icmpv6_process_redirect.c"/>
+                    <file category="source" name="common/src/nx_icmpv6_send_error_message.c"/>
+                    <file category="source" name="common/src/nx_icmpv6_send_ns.c"/>
+                    <file category="source" name="common/src/nx_icmpv6_send_queued_packets.c"/>
+                    <file category="source" name="common/src/nx_icmpv6_send_rs.c"/>
+                    <file category="source" name="common/src/nx_icmpv6_validate_neighbor_message.c"/>
+                    <file category="source" name="common/src/nx_icmpv6_validate_options.c"/>
+                    <file category="source" name="common/src/nx_icmpv6_validate_ra.c"/>
+                    <file category="source" name="common/src/nx_igmp_enable.c"/>
+                    <file category="source" name="common/src/nx_igmp_info_get.c"/>
+                    <file category="source" name="common/src/nx_igmp_interface_report_send.c"/>
+                    <file category="source" name="common/src/nx_igmp_loopback_disable.c"/>
+                    <file category="source" name="common/src/nx_igmp_loopback_enable.c"/>
+                    <file category="source" name="common/src/nx_igmp_multicast_check.c"/>
+                    <file category="source" name="common/src/nx_igmp_multicast_interface_join.c"/>
+                    <file category="source" name="common/src/nx_igmp_multicast_interface_join_internal.c"/>
+                    <file category="source" name="common/src/nx_igmp_multicast_interface_leave.c"/>
+                    <file category="source" name="common/src/nx_igmp_multicast_interface_leave_internal.c"/>
+                    <file category="source" name="common/src/nx_igmp_multicast_join.c"/>
+                    <file category="source" name="common/src/nx_igmp_multicast_leave.c"/>
+                    <file category="source" name="common/src/nx_igmp_packet_process.c"/>
+                    <file category="source" name="common/src/nx_igmp_packet_receive.c"/>
+                    <file category="source" name="common/src/nx_igmp_periodic_processing.c"/>
+                    <file category="source" name="common/src/nx_igmp_queue_process.c"/>
+                    <file category="source" name="common/src/nx_invalidate_destination_entry.c"/>
+                    <file category="source" name="common/src/nx_ip_address_change_notify.c"/>
+                    <file category="source" name="common/src/nx_ip_address_get.c"/>
+                    <file category="source" name="common/src/nx_ip_address_set.c"/>
+                    <file category="source" name="common/src/nx_ip_auxiliary_packet_pool_set.c"/>
+                    <file category="source" name="common/src/nx_ip_checksum_compute.c"/>
+                    <file category="source" name="common/src/nx_ip_create.c"/>
+                    <file category="source" name="common/src/nx_ip_deferred_link_status_process.c"/>
+                    <file category="source" name="common/src/nx_ip_delete.c"/>
+                    <file category="source" name="common/src/nx_ip_delete_queue_clear.c"/>
+                    <file category="source" name="common/src/nx_ip_dispatch_process.c"/>
+                    <file category="source" name="common/src/nx_ip_driver_deferred_enable.c"/>
+                    <file category="source" name="common/src/nx_ip_driver_deferred_processing.c"/>
+                    <file category="source" name="common/src/nx_ip_driver_deferred_receive.c"/>
+                    <file category="source" name="common/src/nx_ip_driver_direct_command.c"/>
+                    <file category="source" name="common/src/nx_ip_driver_interface_direct_command.c"/>
+                    <file category="source" name="common/src/nx_ip_driver_link_status_event.c"/>
+                    <file category="source" name="common/src/nx_ip_driver_packet_send.c"/>
+                    <file category="source" name="common/src/nx_ip_fast_periodic_timer_entry.c"/>
+                    <file category="source" name="common/src/nx_ip_forward_packet_process.c"/>
+                    <file category="source" name="common/src/nx_ip_forwarding_disable.c"/>
+                    <file category="source" name="common/src/nx_ip_forwarding_enable.c"/>
+                    <file category="source" name="common/src/nx_ip_fragment_assembly.c"/>
+                    <file category="source" name="common/src/nx_ip_fragment_disable.c"/>
+                    <file category="source" name="common/src/nx_ip_fragment_enable.c"/>
+                    <file category="source" name="common/src/nx_ip_fragment_forward_packet.c"/>
+                    <file category="source" name="common/src/nx_ip_fragment_packet.c"/>
+                    <file category="source" name="common/src/nx_ip_fragment_timeout_check.c"/>
+                    <file category="source" name="common/src/nx_ip_gateway_address_clear.c"/>
+                    <file category="source" name="common/src/nx_ip_gateway_address_get.c"/>
+                    <file category="source" name="common/src/nx_ip_gateway_address_set.c"/>
+                    <file category="source" name="common/src/nx_ip_header_add.c"/>
+                    <file category="source" name="common/src/nx_ip_info_get.c"/>
+                    <file category="source" name="common/src/nx_ip_initialize.c"/>
+                    <file category="source" name="common/src/nx_ip_interface_address_get.c"/>
+                    <file category="source" name="common/src/nx_ip_interface_address_mapping_configure.c"/>
+                    <file category="source" name="common/src/nx_ip_interface_address_set.c"/>
+                    <file category="source" name="common/src/nx_ip_interface_attach.c"/>
+                    <file category="source" name="common/src/nx_ip_interface_capability_get.c"/>
+                    <file category="source" name="common/src/nx_ip_interface_capability_set.c"/>
+                    <file category="source" name="common/src/nx_ip_interface_detach.c"/>
+                    <file category="source" name="common/src/nx_ip_interface_info_get.c"/>
+                    <file category="source" name="common/src/nx_ip_interface_mtu_set.c"/>
+                    <file category="source" name="common/src/nx_ip_interface_physical_address_get.c"/>
+                    <file category="source" name="common/src/nx_ip_interface_physical_address_set.c"/>
+                    <file category="source" name="common/src/nx_ip_interface_status_check.c"/>
+                    <file category="source" name="common/src/nx_ip_link_status_change_notify_set.c"/>
+                    <file category="source" name="common/src/nx_ip_max_payload_size_find.c"/>
+                    <file category="source" name="common/src/nx_ip_packet_checksum_compute.c"/>
+                    <file category="source" name="common/src/nx_ip_packet_deferred_receive.c"/>
+                    <file category="source" name="common/src/nx_ip_packet_receive.c"/>
+                    <file category="source" name="common/src/nx_ip_packet_send.c"/>
+                    <file category="source" name="common/src/nx_ip_periodic_timer_entry.c"/>
+                    <file category="source" name="common/src/nx_ip_raw_packet_cleanup.c"/>
+                    <file category="source" name="common/src/nx_ip_raw_packet_disable.c"/>
+                    <file category="source" name="common/src/nx_ip_raw_packet_enable.c"/>
+                    <file category="source" name="common/src/nx_ip_raw_packet_filter_set.c"/>
+                    <file category="source" name="common/src/nx_ip_raw_packet_processing.c"/>
+                    <file category="source" name="common/src/nx_ip_raw_packet_receive.c"/>
+                    <file category="source" name="common/src/nx_ip_raw_packet_send.c"/>
+                    <file category="source" name="common/src/nx_ip_raw_packet_source_send.c"/>
+                    <file category="source" name="common/src/nx_ip_raw_receive_queue_max_set.c"/>
+                    <file category="source" name="common/src/nx_ip_route_find.c"/>
+                    <file category="source" name="common/src/nx_ip_static_route_add.c"/>
+                    <file category="source" name="common/src/nx_ip_static_route_delete.c"/>
+                    <file category="source" name="common/src/nx_ip_status_check.c"/>
+                    <file category="source" name="common/src/nx_ip_thread_entry.c"/>
+                    <file category="source" name="common/src/nx_ipv4_multicast_interface_join.c"/>
+                    <file category="source" name="common/src/nx_ipv4_multicast_interface_leave.c"/>
+                    <file category="source" name="common/src/nx_ipv4_option_process.c"/>
+                    <file category="source" name="common/src/nx_ipv4_packet_receive.c"/>
+                    <file category="source" name="common/src/nx_ipv6_fragment_process.c"/>
+                    <file category="source" name="common/src/nx_ipv6_header_add.c"/>
+                    <file category="source" name="common/src/nx_ipv6_multicast_join.c"/>
+                    <file category="source" name="common/src/nx_ipv6_multicast_leave.c"/>
+                    <file category="source" name="common/src/nx_ipv6_option_error.c"/>
+                    <file category="source" name="common/src/nx_ipv6_packet_copy.c"/>
+                    <file category="source" name="common/src/nx_ipv6_packet_receive.c"/>
+                    <file category="source" name="common/src/nx_ipv6_packet_send.c"/>
+                    <file category="source" name="common/src/nx_ipv6_prefix_list_add_entry.c"/>
+                    <file category="source" name="common/src/nx_ipv6_prefix_list_delete.c"/>
+                    <file category="source" name="common/src/nx_ipv6_prefix_list_delete_entry.c"/>
+                    <file category="source" name="common/src/nx_ipv6_process_fragment_option.c"/>
+                    <file category="source" name="common/src/nx_ipv6_process_hop_by_hop_option.c"/>
+                    <file category="source" name="common/src/nx_ipv6_process_routing_option.c"/>
+                    <file category="source" name="common/src/nx_ipv6_util.c"/>
+                    <file category="source" name="common/src/nx_md5.c"/>
+                    <file category="source" name="common/src/nx_nd_cache_add.c"/>
+                    <file category="source" name="common/src/nx_nd_cache_add_entry.c"/>
+                    <file category="source" name="common/src/nx_nd_cache_delete_internal.c"/>
+                    <file category="source" name="common/src/nx_nd_cache_fast_periodic_update.c"/>
+                    <file category="source" name="common/src/nx_nd_cache_find_entry.c"/>
+                    <file category="source" name="common/src/nx_nd_cache_find_entry_by_mac_addr.c"/>
+                    <file category="source" name="common/src/nx_nd_cache_interface_entries_delete.c"/>
+                    <file category="source" name="common/src/nx_nd_cache_slow_periodic_update.c"/>
+                    <file category="source" name="common/src/nx_packet_allocate.c"/>
+                    <file category="source" name="common/src/nx_packet_copy.c"/>
+                    <file category="source" name="common/src/nx_packet_data_adjust.c"/>
+                    <file category="source" name="common/src/nx_packet_data_append.c"/>
+                    <file category="source" name="common/src/nx_packet_data_extract_offset.c"/>
+                    <file category="source" name="common/src/nx_packet_data_retrieve.c"/>
+                    <file category="source" name="common/src/nx_packet_debug_info_get.c"/>
+                    <file category="source" name="common/src/nx_packet_length_get.c"/>
+                    <file category="source" name="common/src/nx_packet_pool_cleanup.c"/>
+                    <file category="source" name="common/src/nx_packet_pool_create.c"/>
+                    <file category="source" name="common/src/nx_packet_pool_delete.c"/>
+                    <file category="source" name="common/src/nx_packet_pool_info_get.c"/>
+                    <file category="source" name="common/src/nx_packet_pool_initialize.c"/>
+                    <file category="source" name="common/src/nx_packet_pool_low_watermark_set.c"/>
+                    <file category="source" name="common/src/nx_packet_release.c"/>
+                    <file category="source" name="common/src/nx_packet_transmit_release.c"/>
+                    <file category="source" name="common/src/nx_ram_network_driver.c"/>
+                    <file category="source" name="common/src/nx_rarp_disable.c"/>
+                    <file category="source" name="common/src/nx_rarp_enable.c"/>
+                    <file category="source" name="common/src/nx_rarp_info_get.c"/>
+                    <file category="source" name="common/src/nx_rarp_packet_deferred_receive.c"/>
+                    <file category="source" name="common/src/nx_rarp_packet_receive.c"/>
+                    <file category="source" name="common/src/nx_rarp_packet_send.c"/>
+                    <file category="source" name="common/src/nx_rarp_periodic_update.c"/>
+                    <file category="source" name="common/src/nx_rarp_queue_process.c"/>
+                    <file category="source" name="common/src/nx_system_initialize.c"/>
+                    <file category="source" name="common/src/nx_tcp_cleanup_deferred.c"/>
+                    <file category="source" name="common/src/nx_tcp_client_bind_cleanup.c"/>
+                    <file category="source" name="common/src/nx_tcp_client_socket_bind.c"/>
+                    <file category="source" name="common/src/nx_tcp_client_socket_connect.c"/>
+                    <file category="source" name="common/src/nx_tcp_client_socket_port_get.c"/>
+                    <file category="source" name="common/src/nx_tcp_client_socket_unbind.c"/>
+                    <file category="source" name="common/src/nx_tcp_connect_cleanup.c"/>
+                    <file category="source" name="common/src/nx_tcp_deferred_cleanup_check.c"/>
+                    <file category="source" name="common/src/nx_tcp_disconnect_cleanup.c"/>
+                    <file category="source" name="common/src/nx_tcp_enable.c"/>
+                    <file category="source" name="common/src/nx_tcp_fast_periodic_processing.c"/>
+                    <file category="source" name="common/src/nx_tcp_free_port_find.c"/>
+                    <file category="source" name="common/src/nx_tcp_info_get.c"/>
+                    <file category="source" name="common/src/nx_tcp_initialize.c"/>
+                    <file category="source" name="common/src/nx_tcp_mss_option_get.c"/>
+                    <file category="source" name="common/src/nx_tcp_no_connection_reset.c"/>
+                    <file category="source" name="common/src/nx_tcp_packet_process.c"/>
+                    <file category="source" name="common/src/nx_tcp_packet_receive.c"/>
+                    <file category="source" name="common/src/nx_tcp_packet_send_ack.c"/>
+                    <file category="source" name="common/src/nx_tcp_packet_send_control.c"/>
+                    <file category="source" name="common/src/nx_tcp_packet_send_fin.c"/>
+                    <file category="source" name="common/src/nx_tcp_packet_send_probe.c"/>
+                    <file category="source" name="common/src/nx_tcp_packet_send_rst.c"/>
+                    <file category="source" name="common/src/nx_tcp_packet_send_syn.c"/>
+                    <file category="source" name="common/src/nx_tcp_periodic_processing.c"/>
+                    <file category="source" name="common/src/nx_tcp_queue_process.c"/>
+                    <file category="source" name="common/src/nx_tcp_receive_cleanup.c"/>
+                    <file category="source" name="common/src/nx_tcp_server_socket_accept.c"/>
+                    <file category="source" name="common/src/nx_tcp_server_socket_listen.c"/>
+                    <file category="source" name="common/src/nx_tcp_server_socket_driver_listen.c"/>
+                    <file category="source" name="common/src/nx_tcp_server_socket_relisten.c"/>
+                    <file category="source" name="common/src/nx_tcp_server_socket_unaccept.c"/>
+                    <file category="source" name="common/src/nx_tcp_server_socket_unlisten.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_block_cleanup.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_bytes_available.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_connection_reset.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_create.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_delete.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_disconnect.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_disconnect_complete_notify.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_driver_establish.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_driver_packet_receive.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_establish_notify.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_info_get.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_mss_get.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_mss_peer_get.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_mss_set.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_packet_process.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_peer_info_get.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_queue_depth_notify_set.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_receive.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_receive_notify.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_receive_queue_flush.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_receive_queue_max_set.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_retransmit.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_send.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_send_internal.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_state_ack_check.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_state_closing.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_state_data_check.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_state_established.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_state_fin_wait1.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_state_fin_wait2.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_state_last_ack.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_state_syn_received.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_state_syn_sent.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_state_transmit_check.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_state_wait.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_thread_resume.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_thread_suspend.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_timed_wait_callback.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_transmit_configure.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_transmit_queue_flush.c"/>
+                    <file category="source" name="common/src/nx_tcp_socket_window_update_notify_set.c"/>
+                    <file category="source" name="common/src/nx_tcp_transmit_cleanup.c"/>
+                    <file category="source" name="common/src/nx_tcp_window_scaling_option_get.c"/>
+                    <file category="source" name="common/src/nx_trace_event_insert.c"/>
+                    <file category="source" name="common/src/nx_trace_event_update.c"/>
+                    <file category="source" name="common/src/nx_trace_object_register.c"/>
+                    <file category="source" name="common/src/nx_trace_object_unregister.c"/>
+                    <file category="source" name="common/src/nx_udp_bind_cleanup.c"/>
+                    <file category="source" name="common/src/nx_udp_enable.c"/>
+                    <file category="source" name="common/src/nx_udp_free_port_find.c"/>
+                    <file category="source" name="common/src/nx_udp_info_get.c"/>
+                    <file category="source" name="common/src/nx_udp_packet_info_extract.c"/>
+                    <file category="source" name="common/src/nx_udp_packet_receive.c"/>
+                    <file category="source" name="common/src/nx_udp_receive_cleanup.c"/>
+                    <file category="source" name="common/src/nx_udp_socket_bind.c"/>
+                    <file category="source" name="common/src/nx_udp_socket_bytes_available.c"/>
+                    <file category="source" name="common/src/nx_udp_socket_checksum_disable.c"/>
+                    <file category="source" name="common/src/nx_udp_socket_checksum_enable.c"/>
+                    <file category="source" name="common/src/nx_udp_socket_create.c"/>
+                    <file category="source" name="common/src/nx_udp_socket_delete.c"/>
+                    <file category="source" name="common/src/nx_udp_socket_driver_packet_receive.c"/>
+                    <file category="source" name="common/src/nx_udp_socket_info_get.c"/>
+                    <file category="source" name="common/src/nx_udp_socket_port_get.c"/>
+                    <file category="source" name="common/src/nx_udp_socket_receive.c"/>
+                    <file category="source" name="common/src/nx_udp_socket_receive_notify.c"/>
+                    <file category="source" name="common/src/nx_udp_socket_send.c"/>
+                    <file category="source" name="common/src/nx_udp_socket_source_send.c"/>
+                    <file category="source" name="common/src/nx_udp_socket_unbind.c"/>
+                    <file category="source" name="common/src/nx_udp_source_extract.c"/>
+                    <file category="source" name="common/src/nx_utility.c"/>
+                    <file category="source" name="common/src/nxd_icmp_enable.c"/>
+                    <file category="source" name="common/src/nxd_icmp_ping.c"/>
+                    <file category="source" name="common/src/nxd_icmp_source_ping.c"/>
+                    <file category="source" name="common/src/nxd_icmpv6_ra_flag_callback_set.c"/>
+                    <file category="source" name="common/src/nxd_ip_raw_packet_send.c"/>
+                    <file category="source" name="common/src/nxd_ip_raw_packet_source_send.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_address_change_notify.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_address_delete.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_address_get.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_address_set.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_default_router_add.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_default_router_add_internal.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_default_router_delete.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_default_router_entry_get.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_default_router_get.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_default_router_number_of_entries_get.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_default_router_table_init.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_destination_table_find_next_hop.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_disable.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_enable.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_find_default_router_from_address.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_find_max_prefix_length.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_interface_find.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_multicast_interface_join.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_multicast_interface_leave.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_prefix_router_timer_tick.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_raw_packet_send_internal.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_router_lookup.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_router_solicitation_check.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_search_onlink.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_stateless_address_autoconfig_disable.c"/>
+                    <file category="source" name="common/src/nxd_ipv6_stateless_address_autoconfig_enable.c"/>
+                    <file category="source" name="common/src/nxd_nd_cache_entry_delete.c"/>
+                    <file category="source" name="common/src/nxd_nd_cache_entry_set.c"/>
+                    <file category="source" name="common/src/nxd_nd_cache_hardware_address_find.c"/>
+                    <file category="source" name="common/src/nxd_nd_cache_invalidate.c"/>
+                    <file category="source" name="common/src/nxd_nd_cache_ip_address_find.c"/>
+                    <file category="source" name="common/src/nxd_tcp_client_socket_connect.c"/>
+                    <file category="source" name="common/src/nxd_tcp_socket_peer_info_get.c"/>
+                    <file category="source" name="common/src/nxd_udp_packet_info_extract.c"/>
+                    <file category="source" name="common/src/nxd_udp_socket_send.c"/>
+                    <file category="source" name="common/src/nxd_udp_socket_source_send.c"/>
+                    <file category="source" name="common/src/nxd_udp_source_extract.c"/>
+                    <file category="source" name="common/src/nxde_icmp_enable.c"/>
+                    <file category="source" name="common/src/nxde_icmp_ping.c"/>
+                    <file category="source" name="common/src/nxde_icmp_source_ping.c"/>
+                    <file category="source" name="common/src/nxde_icmpv6_ra_flag_callback_set.c"/>
+                    <file category="source" name="common/src/nxde_ip_raw_packet_send.c"/>
+                    <file category="source" name="common/src/nxde_ip_raw_packet_source_send.c"/>
+                    <file category="source" name="common/src/nxde_ipv6_address_change_notify.c"/>
+                    <file category="source" name="common/src/nxde_ipv6_address_delete.c"/>
+                    <file category="source" name="common/src/nxde_ipv6_address_get.c"/>
+                    <file category="source" name="common/src/nxde_ipv6_address_set.c"/>
+                    <file category="source" name="common/src/nxde_ipv6_default_router_add.c"/>
+                    <file category="source" name="common/src/nxde_ipv6_default_router_delete.c"/>
+                    <file category="source" name="common/src/nxde_ipv6_default_router_entry_get.c"/>
+                    <file category="source" name="common/src/nxde_ipv6_default_router_get.c"/>
+                    <file category="source" name="common/src/nxde_ipv6_default_router_number_of_entries_get.c"/>
+                    <file category="source" name="common/src/nxde_ipv6_disable.c"/>
+                    <file category="source" name="common/src/nxde_ipv6_enable.c"/>
+                    <file category="source" name="common/src/nxde_ipv6_multicast_interface_join.c"/>
+                    <file category="source" name="common/src/nxde_ipv6_multicast_interface_leave.c"/>
+                    <file category="source" name="common/src/nxde_ipv6_stateless_address_autoconfig_disable.c"/>
+                    <file category="source" name="common/src/nxde_ipv6_stateless_address_autoconfig_enable.c"/>
+                    <file category="source" name="common/src/nxde_nd_cache_entry_delete.c"/>
+                    <file category="source" name="common/src/nxde_nd_cache_entry_set.c"/>
+                    <file category="source" name="common/src/nxde_nd_cache_hardware_address_find.c"/>
+                    <file category="source" name="common/src/nxde_nd_cache_invalidate.c"/>
+                    <file category="source" name="common/src/nxde_nd_cache_ip_address_find.c"/>
+                    <file category="source" name="common/src/nxde_tcp_client_socket_connect.c"/>
+                    <file category="source" name="common/src/nxde_tcp_socket_peer_info_get.c"/>
+                    <file category="source" name="common/src/nxde_udp_packet_info_extract.c"/>
+                    <file category="source" name="common/src/nxde_udp_socket_send.c"/>
+                    <file category="source" name="common/src/nxde_udp_socket_source_send.c"/>
+                    <file category="source" name="common/src/nxde_udp_source_extract.c"/>
+                    <file category="source" name="common/src/nxe_arp_dynamic_entries_invalidate.c"/>
+                    <file category="source" name="common/src/nxe_arp_dynamic_entry_set.c"/>
+                    <file category="source" name="common/src/nxe_arp_enable.c"/>
+                    <file category="source" name="common/src/nxe_arp_entry_delete.c"/>
+                    <file category="source" name="common/src/nxe_arp_gratuitous_send.c"/>
+                    <file category="source" name="common/src/nxe_arp_hardware_address_find.c"/>
+                    <file category="source" name="common/src/nxe_arp_info_get.c"/>
+                    <file category="source" name="common/src/nxe_arp_ip_address_find.c"/>
+                    <file category="source" name="common/src/nxe_arp_static_entries_delete.c"/>
+                    <file category="source" name="common/src/nxe_arp_static_entry_create.c"/>
+                    <file category="source" name="common/src/nxe_arp_static_entry_delete.c"/>
+                    <file category="source" name="common/src/nxe_icmp_enable.c"/>
+                    <file category="source" name="common/src/nxe_icmp_info_get.c"/>
+                    <file category="source" name="common/src/nxe_icmp_ping.c"/>
+                    <file category="source" name="common/src/nxe_igmp_enable.c"/>
+                    <file category="source" name="common/src/nxe_igmp_info_get.c"/>
+                    <file category="source" name="common/src/nxe_igmp_loopback_disable.c"/>
+                    <file category="source" name="common/src/nxe_igmp_loopback_enable.c"/>
+                    <file category="source" name="common/src/nxe_igmp_multicast_interface_join.c"/>
+                    <file category="source" name="common/src/nxe_igmp_multicast_interface_leave.c"/>
+                    <file category="source" name="common/src/nxe_igmp_multicast_join.c"/>
+                    <file category="source" name="common/src/nxe_igmp_multicast_leave.c"/>
+                    <file category="source" name="common/src/nxe_ip_address_change_notify.c"/>
+                    <file category="source" name="common/src/nxe_ip_address_get.c"/>
+                    <file category="source" name="common/src/nxe_ip_address_set.c"/>
+                    <file category="source" name="common/src/nxe_ip_auxiliary_packet_pool_set.c"/>
+                    <file category="source" name="common/src/nxe_ip_create.c"/>
+                    <file category="source" name="common/src/nxe_ip_delete.c"/>
+                    <file category="source" name="common/src/nxe_ip_driver_direct_command.c"/>
+                    <file category="source" name="common/src/nxe_ip_driver_interface_direct_command.c"/>
+                    <file category="source" name="common/src/nxe_ip_forwarding_disable.c"/>
+                    <file category="source" name="common/src/nxe_ip_forwarding_enable.c"/>
+                    <file category="source" name="common/src/nxe_ip_fragment_disable.c"/>
+                    <file category="source" name="common/src/nxe_ip_fragment_enable.c"/>
+                    <file category="source" name="common/src/nxe_ip_gateway_address_clear.c"/>
+                    <file category="source" name="common/src/nxe_ip_gateway_address_get.c"/>
+                    <file category="source" name="common/src/nxe_ip_gateway_address_set.c"/>
+                    <file category="source" name="common/src/nxe_ip_info_get.c"/>
+                    <file category="source" name="common/src/nxe_ip_interface_address_get.c"/>
+                    <file category="source" name="common/src/nxe_ip_interface_address_mapping_configure.c"/>
+                    <file category="source" name="common/src/nxe_ip_interface_address_set.c"/>
+                    <file category="source" name="common/src/nxe_ip_interface_attach.c"/>
+                    <file category="source" name="common/src/nxe_ip_interface_capability_get.c"/>
+                    <file category="source" name="common/src/nxe_ip_interface_capability_set.c"/>
+                    <file category="source" name="common/src/nxe_ip_interface_detach.c"/>
+                    <file category="source" name="common/src/nxe_ip_interface_info_get.c"/>
+                    <file category="source" name="common/src/nxe_ip_interface_mtu_set.c"/>
+                    <file category="source" name="common/src/nxe_ip_interface_physical_address_get.c"/>
+                    <file category="source" name="common/src/nxe_ip_interface_physical_address_set.c"/>
+                    <file category="source" name="common/src/nxe_ip_interface_status_check.c"/>
+                    <file category="source" name="common/src/nxe_ip_link_status_change_notify_set.c"/>
+                    <file category="source" name="common/src/nxe_ip_max_payload_size_find.c"/>
+                    <file category="source" name="common/src/nxe_ip_raw_packet_disable.c"/>
+                    <file category="source" name="common/src/nxe_ip_raw_packet_enable.c"/>
+                    <file category="source" name="common/src/nxe_ip_raw_packet_filter_set.c"/>
+                    <file category="source" name="common/src/nxe_ip_raw_packet_receive.c"/>
+                    <file category="source" name="common/src/nxe_ip_raw_packet_send.c"/>
+                    <file category="source" name="common/src/nxe_ip_raw_packet_source_send.c"/>
+                    <file category="source" name="common/src/nxe_ip_raw_receive_queue_max_set.c"/>
+                    <file category="source" name="common/src/nxe_ip_static_route_add.c"/>
+                    <file category="source" name="common/src/nxe_ip_static_route_delete.c"/>
+                    <file category="source" name="common/src/nxe_ip_status_check.c"/>
+                    <file category="source" name="common/src/nxe_ipv4_multicast_interface_join.c"/>
+                    <file category="source" name="common/src/nxe_ipv4_multicast_interface_leave.c"/>
+                    <file category="source" name="common/src/nxe_packet_allocate.c"/>
+                    <file category="source" name="common/src/nxe_packet_copy.c"/>
+                    <file category="source" name="common/src/nxe_packet_data_append.c"/>
+                    <file category="source" name="common/src/nxe_packet_data_extract_offset.c"/>
+                    <file category="source" name="common/src/nxe_packet_data_retrieve.c"/>
+                    <file category="source" name="common/src/nxe_packet_length_get.c"/>
+                    <file category="source" name="common/src/nxe_packet_pool_create.c"/>
+                    <file category="source" name="common/src/nxe_packet_pool_delete.c"/>
+                    <file category="source" name="common/src/nxe_packet_pool_info_get.c"/>
+                    <file category="source" name="common/src/nxe_packet_pool_low_watermark_set.c"/>
+                    <file category="source" name="common/src/nxe_packet_release.c"/>
+                    <file category="source" name="common/src/nxe_packet_transmit_release.c"/>
+                    <file category="source" name="common/src/nxe_rarp_disable.c"/>
+                    <file category="source" name="common/src/nxe_rarp_enable.c"/>
+                    <file category="source" name="common/src/nxe_rarp_info_get.c"/>
+                    <file category="source" name="common/src/nxe_tcp_client_socket_bind.c"/>
+                    <file category="source" name="common/src/nxe_tcp_client_socket_connect.c"/>
+                    <file category="source" name="common/src/nxe_tcp_client_socket_port_get.c"/>
+                    <file category="source" name="common/src/nxe_tcp_client_socket_unbind.c"/>
+                    <file category="source" name="common/src/nxe_tcp_enable.c"/>
+                    <file category="source" name="common/src/nxe_tcp_free_port_find.c"/>
+                    <file category="source" name="common/src/nxe_tcp_info_get.c"/>
+                    <file category="source" name="common/src/nxe_tcp_socket_send.c"/>
+                    <file category="source" name="common/src/nxe_tcp_socket_state_wait.c"/>
+                    <file category="source" name="common/src/nxe_tcp_socket_timed_wait_callback.c"/>
+                    <file category="source" name="common/src/nxe_tcp_socket_transmit_configure.c"/>
+                    <file category="source" name="common/src/nxe_tcp_socket_window_update_notify_set.c"/>
+                    <file category="source" name="common/src/nxe_udp_enable.c"/>
+                    <file category="source" name="common/src/nxe_udp_free_port_find.c"/>
+                    <file category="source" name="common/src/nxe_udp_info_get.c"/>
+                    <file category="source" name="common/src/nxe_udp_packet_info_extract.c"/>
+                    <file category="source" name="common/src/nxe_udp_socket_bind.c"/>
+                    <file category="source" name="common/src/nxe_udp_socket_bytes_available.c"/>
+                    <file category="source" name="common/src/nxe_udp_socket_checksum_disable.c"/>
+                    <file category="source" name="common/src/nxe_udp_socket_checksum_enable.c"/>
+                    <file category="source" name="common/src/nxe_udp_socket_create.c"/>
+                    <file category="source" name="common/src/nxe_udp_socket_delete.c"/>
+                    <file category="source" name="common/src/nxe_udp_socket_info_get.c"/>
+                    <file category="source" name="common/src/nxe_udp_socket_port_get.c"/>
+                    <file category="source" name="common/src/nxe_udp_socket_receive.c"/>
+                    <file category="source" name="common/src/nxe_udp_socket_receive_notify.c"/>
+                    <file category="source" name="common/src/nxe_udp_socket_send.c"/>
+                    <file category="source" name="common/src/nxe_udp_socket_source_send.c"/>
+                    <file category="source" name="common/src/nxe_udp_socket_unbind.c"/>
+                    <file category="source" name="common/src/nxe_udp_source_extract.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="AutoIP" condition="NXD Common Condition" maxInstances="1">
+                <description>Addons AutoIP</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_ADDON_AUTOIP_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/auto_ip/"/>
+                    <file category="source" name="addons/auto_ip/nx_auto_ip.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="Azure IOT" condition="NXD Common Condition" maxInstances="1">
+                <description>Addons Azure IOT</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_ADDON_AZURE_IOT_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/azure_iot/"/>
+                    <file category="source" name="addons/azure_iot/nx_azure_iot.c"/>
+                    <file category="source" name="addons/azure_iot/nx_azure_iot_hub_client.c"/>
+                    <file category="source" name="addons/azure_iot/nx_azure_iot_hub_client_properties.c"/>
+                    <file category="source" name="addons/azure_iot/nx_azure_iot_json_reader.c"/>
+                    <file category="source" name="addons/azure_iot/nx_azure_iot_json_writer.c"/>
+                    <file category="source" name="addons/azure_iot/nx_azure_iot_provisioning_client.c"/>
+                    <file category="source" name="addons/azure_iot/nx_azure_iot_adu_agent.c"/>
+                    <file category="source" name="addons/azure_iot/nx_azure_iot_adu_root_key.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="BSD" condition="NXD Common Condition" maxInstances="1">
+                <description>Addons BSD</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_ADDON_BSD_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/BSD/"/>
+                    <file category="source" name="addons/BSD/nxd_bsd.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="Cloud" condition="NXD Common Condition" maxInstances="1">
+                <description>Addons Cloud</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_ADDON_CLOUD_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="source" name="addons/cloud/nx_cloud.c"/>
+                    <file category="include" name="addons/cloud/"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="DHCP Client" condition="NXD DHCP Client Condition" maxInstances="1">
+                <description>Addons DHCP Client </description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_ADDON_DHCP_CLIENT_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/dhcp/"/>
+                    <file category="source" name="addons/dhcp/nxd_dhcp_client.c"/>
+                    <file category="source" name="addons/dhcp/nxd_dhcpv6_client.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="DHCP Server" condition="NXD DHCP Server Condition" maxInstances="1">
+                <description>Addons DHCP Server</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_ADDON_DHCP_SERVER_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/dhcp/"/>
+                    <file category="source" name="addons/dhcp/nxd_dhcp_server.c"/>
+                    <file category="source" name="addons/dhcp/nxd_dhcpv6_server.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="DNS" condition="NXD Common Condition" maxInstances="1">
+                <description>Addons DNS</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_ADDON_DNS_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/dns/"/>
+                    <file category="source" name="addons/dns/nxd_dns.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="FTP Client" condition="NXD FTP Client Condition" maxInstances="1">
+                <description>Addons FTP Client </description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_ADDON_FTP_CLIENT_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/ftp/"/>
+                    <file category="source" name="addons/ftp/nxd_ftp_client.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="FTP Server" condition="NXD FTP Server Condition" maxInstances="1">
+                <description>Addons DHCP Server</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_ADDON_FTP_SERVER_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/ftp/"/>
+                    <file category="source" name="addons/ftp/nxd_ftp_server.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="HTTP Client" condition="NXD HTTP Client Condition" maxInstances="1">
+                <description>Addons HTTP Client </description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_ADDON_HTTP_CLIENT_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/http/"/>
+                    <file category="source" name="addons/http/nxd_http_client.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="HTTP Server" condition="NXD HTTP Server Condition" maxInstances="1">
+                <description>Addons HTTP Server</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_ADDON_HTTP_SERVER_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/http/"/>
+                    <file category="source" name="addons/http/nxd_http_server.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="LwM2M" condition="NXD Common Condition" maxInstances="1">
+                <description>Addons LwM2M</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_LWM2M_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/lwm2m/"/>
+                    <file category="source" name="addons/lwm2m/nx_lwm2m_client.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="mDNS" condition="NXD Common Condition" maxInstances="1">
+                <description>Addons mDNS​</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_MDNS_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/mdns/"/>
+                    <file category="source" name="addons/mdns/nxd_mdns.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="MQTT" condition="NXD Common Condition" maxInstances="1">
+                <description>Addons MQTT</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_MQTT_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/mqtt/"/>
+                    <file category="source" name="addons/mqtt/nxd_mqtt_client.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="NAT" condition="NXD Common Condition" maxInstances="1">
+                <description>Addons NAT</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_NAT_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/nat/"/>
+                    <file category="source" name="addons/nat/nx_nat.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="POP3" condition="NXD Common Condition" maxInstances="1">
+                <description>Addons POP3</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_POP3_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/pop3/"/>
+                    <file category="source" name="addons/pop3/nxd_pop3_client.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="PPP" condition="NXD Common Condition" maxInstances="1">
+                <description>Addons PPP</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_PPP_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/ppp/"/>
+                    <file category="source" name="addons/ppp/nx_ppp.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="PPPOE Client" condition="NXD PPPOE Client Condition" maxInstances="1">
+                <description>Addons PPPOE Client</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_PPPOE_CLIENT_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/pppoe/"/>
+                    <file category="source" name="addons/pppoe/nx_pppoe_client.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="PPPOE Server" condition="NXD PPPOE Server Condition" maxInstances="1">
+                <description>Addons PPPOE Server</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_PPPOE_SERVER_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/pppoe/"/>
+                    <file category="source" name="addons/pppoe/nx_pppoe_server.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="PTP Client" condition="NXD Common Condition" maxInstances="1">
+                <description>Addons PTP Client</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_PTP_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/ptp/"/>
+                    <file category="source" name="addons/ptp/nxd_ptp_client.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="SMTP" condition="NXD Common Condition" maxInstances="1">
+                <description>Addons SMTP</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_SMTP_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/smtp/"/>
+                    <file category="source" name="addons/smtp/nxd_smtp_client.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="SNMP" condition="NXD Common Condition" maxInstances="1">
+                <description>Addons SNMP</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_SNMP_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/snmp/"/>
+                    <file category="source" name="addons/snmp/nx_des.c"/>
+                    <file category="source" name="addons/snmp/nx_sha1.c"/>
+                    <file category="source" name="addons/snmp/nxd_snmp.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="SNTP" condition="NXD Common Condition" maxInstances="1">
+                <description>Addons SNTP</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_SNTP_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/sntp/"/>
+                    <file category="source" name="addons/sntp/nxd_sntp_client.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="TELNET Client" condition="NXD TELNET Client Condition" maxInstances="1">
+                <description>Addons TELNET Client</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_TELNET_CLIENT_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/telnet/"/>
+                    <file category="source" name="addons/telnet/nxd_telnet_client.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="TELNET Server" condition="NXD TELNET Server Condition" maxInstances="1">
+                <description>Addons TELNET Server</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_TELNET_SERVER_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/telnet/"/>
+                    <file category="source" name="addons/telnet/nxd_telnet_server.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="TFTP Client" condition="NXD TFTP Client Condition" maxInstances="1">
+                <description>Addons TFTP Client </description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_ADDON_TFTP_CLIENT_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/tftp/"/>
+                    <file category="source" name="addons/tftp/nxd_tftp_client.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="TFTP Server" condition="NXD TFTP Server Condition" maxInstances="1">
+                <description>Addons TFTP Server</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_ADDON_TFTP_SERVER_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/tftp/"/>
+                    <file category="source" name="addons/tftp/nxd_tftp_server.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="Web Client" condition="NXD Web Client Condition" maxInstances="1">
+                <description>Addons Web Client</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_ADDONS_WEB_CLIENT_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/web/"/>
+                    <file category="source" name="addons/web/nx_web_http_client.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="Web Server" condition="NXD Web Server Condition" maxInstances="1">
+                <description>Addons Web Server</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_ADDONS_WEB_SERVER_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/web/"/>
+                    <file category="source" name="addons/web/nx_tcpserver.c"/>
+                    <file category="source" name="addons/web/nx_web_http_server.c"/>
+                </files>
+            </component>
+            <component Cgroup="Addons" Csub="WebSocket" condition="NXD Common Condition" maxInstances="1">
+                <description>Addons WebSocket</description>
+                <RTE_Components_h>#define AZURE_RTOS_NETXDUO_ADDONS_WEBSOCKET_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="addons/websocket/"/>
+                    <file category="source" name="addons/websocket/nx_websocket_client.c"/>
+                </files>
+            </component>
+
+            <!-- NX_SECURE files (305 files in total) -->
+            <component Cgroup="NetX Secure" Csub="NetX Secure" condition="NX_SECURE Condition" maxInstances="1">
+                <description>NX_SECURE TLS/DTLS Stack</description>
+                <RTE_Components_h>#define AZURE_RTOS_NX_SECURE_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="nx_secure/inc/"/>
+                    <file category="include" name="nx_secure/ports/"/>
+                    <file category="source" name="nx_secure/src/nx_secure_crypto_method_self_test_3des.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_crypto_method_self_test_aes.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_crypto_method_self_test_des.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_crypto_method_self_test_hmac_md5.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_crypto_method_self_test_hmac_sha.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_crypto_method_self_test_md5.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_crypto_method_self_test_prf.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_crypto_method_self_test_rsa.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_crypto_method_self_test_sha.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_crypto_rng_self_test.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_crypto_table_self_test.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_allocate_handshake_packet.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_client_handshake.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_client_protocol_version_override.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_client_session_start.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_ecc_initialize.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_hash_record.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_initialize.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_packet_allocate.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_process_clienthello.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_process_handshake_header.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_process_header.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_process_helloverifyrequest.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_process_record.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_psk_add.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_receive_callback.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_retransmit.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_retransmit_queue_flush.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_send_clienthello.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_send_handshake_record.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_send_helloverifyrequest.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_send_record.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_send_serverhello.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_server_create.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_server_delete.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_server_ecc_initialize.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_server_handshake.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_server_local_certificate_add.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_server_local_certificate_remove.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_server_notify_set.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_server_protocol_version_override.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_server_psk_add.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_server_session_send.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_server_session_start.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_server_start.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_server_stop.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_server_trusted_certificate_add.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_server_trusted_certificate_remove.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_server_x509_client_verify_configure.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_server_x509_client_verify_disable.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_session_cache.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_session_client_info_get.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_session_create.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_session_delete.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_session_end.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_session_local_certificate_add.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_session_local_certificate_remove.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_session_receive.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_session_reset.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_session_send.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_session_start.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_session_trusted_certificate_add.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_session_trusted_certificate_remove.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_session_sliding_window_check.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_session_sliding_window_update.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_dtls_verify_mac.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_generate_client_key_exchange.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_generate_master_secret.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_generate_premaster_secret.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_generate_server_key_exchange.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_generate_session_keys.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_module_hash_compute.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_process_client_key_exchange.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_process_server_key_exchange.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_remote_certificate_verify.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_session_keys_set.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_1_3_client_handshake.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_1_3_crypto_init.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_1_3_finished_hash_generate.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_1_3_generate_keys.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_1_3_server_handshake.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_1_3_session_keys_set.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_1_3_transcript_hash_save.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_active_certificate_set.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_allocate_handshake_packet.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_check_protocol_version.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_ciphersuite_lookup.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_client_handshake.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_client_psk_set.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_ecc_generate_keys.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_ecc_initialize.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_find_curve_method.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_finished_hash_generate.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_generate_keys.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_generate_premaster_secret.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_handshake_hash_init.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_handshake_hash_update.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_handshake_process.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_hash_record.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_initialize.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_key_material_init.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_local_certificate_add.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_local_certificate_find.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_local_certificate_remove.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_map_error_to_alert.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_metadata_size_calculate.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_newest_supported_version.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_packet_allocate.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_packet_release.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_process_certificate_request.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_process_certificate_verify.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_process_changecipherspec.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_process_client_key_exchange.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_process_clienthello.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_process_clienthello_extensions.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_process_encrypted_extensions.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_process_finished.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_process_handshake_header.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_process_header.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_process_newsessionticket.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_process_record.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_process_remote_certificate.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_process_server_key_exchange.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_process_serverhello.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_process_serverhello_extensions.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_protocol_version_get.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_psk_add.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_psk_binder_generate.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_psk_find.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_psk_identity_find.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_record_hash_calculate.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_record_hash_initialize.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_record_hash_update.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_record_payload_decrypt.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_record_payload_encrypt.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_remote_certificate_allocate.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_remote_certificate_buffer_allocate.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_remote_certificate_free.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_remote_certificate_free_all.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_remote_certificate_verify.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_send_alert.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_send_certificate.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_send_certificate_request.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_send_certificate_verify.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_send_changecipherspec.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_send_client_key_exchange.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_send_clienthello.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_send_clienthello_extensions.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_send_encrypted_extensions.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_send_finished.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_send_handshake_record.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_send_hellorequest.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_send_newsessionticket.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_send_record.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_send_server_key_exchange.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_send_serverhello.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_send_serverhello_extensions.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_server_certificate_add.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_server_certificate_find.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_server_certificate_remove.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_server_handshake.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_alert_value_get.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_certificate_callback_set.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_client_callback_set.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_client_verify_disable.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_client_verify_enable.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_create.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_create_ext.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_delete.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_end.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_iv_size_get.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_keys_set.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_packet_buffer_set.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_packet_pool_set.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_protocol_version_override.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_receive.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_receive_records.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_renegotiate.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_renegotiate_callback_set.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_reset.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_send.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_server_callback_set.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_sni_extension_parse.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_sni_extension_set.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_start.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_time_function_set.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_session_x509_client_verify_configure.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_shutdown.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_trusted_certificate_add.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_trusted_certificate_remove.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_tls_verify_mac.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_trusted_certificate_add.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_verify_mac.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_asn1_tlv_block_parse.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_certificate_chain_verify.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_certificate_initialize.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_certificate_list_add.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_certificate_list_find.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_certificate_list_remove.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_certificate_revocation_list_parse.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_certificate_verify.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_common_name_dns_check.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_crl_revocation_check.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_crl_verify.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_distinguished_name_compare.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_distinguished_name_parse.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_dns_name_initialize.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_ec_private_key_parse.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_expiration_check.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_extended_key_usage_extension_parse.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_extension_find.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_find_certificate_methods.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_find_curve_method.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_free_certificate_get.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_key_usage_extension_parse.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_local_certificate_find.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_local_device_certificate_get.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_oid_parse.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_pkcs1_rsa_private_key_parse.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_pkcs7_decode.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_remote_endpoint_certificate_get.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_store_certificate_add.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_store_certificate_find.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_store_certificate_remove.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_subject_alt_names_find.c"/>
+                    <file category="source" name="nx_secure/src/nx_secure_x509_wildcard_compare.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_client_protocol_version_override.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_client_session_start.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_ecc_initialize.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_packet_allocate.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_psk_add.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_server_create.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_server_delete.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_server_ecc_initialize.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_server_local_certificate_add.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_server_local_certificate_remove.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_server_notify_set.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_server_protocol_version_override.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_server_psk_add.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_server_session_send.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_server_session_start.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_server_start.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_server_stop.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_server_trusted_certificate_add.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_server_trusted_certificate_remove.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_server_x509_client_verify_configure.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_server_x509_client_verify_disable.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_session_client_info_get.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_session_create.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_session_delete.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_session_end.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_session_local_certificate_add.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_session_local_certificate_remove.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_session_receive.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_session_reset.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_session_send.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_session_start.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_session_trusted_certificate_add.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_dtls_session_trusted_certificate_remove.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_active_certificate_set.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_client_psk_set.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_local_certificate_add.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_local_certificate_find.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_local_certificate_remove.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_metadata_size_calculate.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_packet_allocate.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_psk_add.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_remote_certificate_allocate.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_remote_certificate_buffer_allocate.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_remote_certificate_free_all.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_server_certificate_add.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_server_certificate_find.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_server_certificate_remove.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_session_alert_value_get.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_session_certificate_callback_set.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_session_client_callback_set.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_session_client_verify_disable.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_session_client_verify_enable.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_session_create.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_session_delete.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_session_end.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_session_packet_buffer_set.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_session_packet_pool_set.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_session_protocol_version_override.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_session_receive.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_session_renegotiate.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_session_renegotiate_callback_set.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_session_reset.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_session_send.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_session_server_callback_set.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_session_sni_extension_parse.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_session_sni_extension_set.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_session_start.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_session_time_function_set.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_session_x509_client_verify_configure.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_trusted_certificate_add.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_tls_trusted_certificate_remove.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_x509_certificate_initialize.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_x509_common_name_dns_check.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_x509_crl_revocation_check.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_x509_dns_name_initialize.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_x509_extended_key_usage_extension_parse.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_x509_extension_find.c"/>
+                    <file category="source" name="nx_secure/src/nxe_secure_x509_key_usage_extension_parse.c"/>
+                </files>
+            </component>
+
+            <!-- Crypto_Library files -->
+            <component Cgroup="NetX Crypto" Csub="NetX Crypto" maxInstances="1">
+                <description>NetX Crypto library</description>
+                <RTE_Components_h>#define AZURE_RTOS_NX_CRYPTO_LIBRARY_ENABLED</RTE_Components_h>
+                <files>
+                    <file category="include" name="crypto_libraries/inc/"/>
+
+                    <!-- Porting files -->
+                    <file category="include" condition="CM3 IAR Condition" name="crypto_libraries/ports/cortex_m3/iar/inc/"/>
+                    <file category="include" condition="CM3 GNU Condition" name="crypto_libraries/ports/cortex_m3/gnu/inc/"/>
+                    <file category="include" condition="CM3 ARMC6 Condition" name="crypto_libraries/ports/cortex_m3/ac6/inc/"/>
+
+                    <file category="include" condition="CM4 IAR Condition" name="crypto_libraries/ports/cortex_m4/iar/inc/"/>
+                    <file category="include" condition="CM4 GNU Condition" name="crypto_libraries/ports/cortex_m4/gnu/inc/"/>
+                    <file category="include" condition="CM7 ARMC6 Condition" name="crypto_libraries/ports/cortex_m7/ac6/inc/"/>
+
+                    <file category="include" condition="CM7 IAR Condition" name="crypto_libraries/ports/cortex_m7/iar/inc/"/>
+                    <file category="include" condition="CM7 GNU Condition" name="crypto_libraries/ports/cortex_m7/gnu/inc/"/>
+                    <file category="include" condition="CM4 ARMC6 Condition" name="crypto_libraries/ports/cortex_m4/ac6/inc/"/>
+
+                    <!-- 56 source files -->
+                    <file category="source" name="crypto_libraries/src/nx_crypto_3des.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_aes.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_cbc.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_ccm.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_ctr.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_des.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_dh.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_drbg.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_ec.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_ec_secp192r1_fixed_points.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_ec_secp224r1_fixed_points.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_ec_secp256r1_fixed_points.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_ec_secp384r1_fixed_points.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_ec_secp521r1_fixed_points.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_ecdh.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_ecdsa.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_ecjpake.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_gcm.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_generic_ciphersuites.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_hkdf.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_hmac.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_hmac_md5.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_hmac_sha1.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_hmac_sha2.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_hmac_sha5.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_huge_number.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_huge_number_extended.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_initialize.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_md5.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_method_self_test.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_method_self_test_3des.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_method_self_test_aes.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_method_self_test_des.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_method_self_test_drbg.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_method_self_test_ecdh.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_method_self_test_ecdsa.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_method_self_test_hmac_md5.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_method_self_test_hmac_sha.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_method_self_test_md5.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_method_self_test_pkcs1.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_method_self_test_prf.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_method_self_test_rsa.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_method_self_test_sha.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_methods.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_null_cipher.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_phash.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_pkcs1_v1.5.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_rsa.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_sha1.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_sha2.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_sha5.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_tls_prf_1.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_tls_prf_sha256.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_tls_prf_sha384.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_tls_prf_sha512.c"/>
+                    <file category="source" name="crypto_libraries/src/nx_crypto_xcbc_mac.c"/>
+                </files>
+            </component>
+
+        </bundle>
+    </components>
+
+</package>

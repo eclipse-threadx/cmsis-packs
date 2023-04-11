@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='utf-8'?>
+<package schemaVersion="1.7.7" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Open-CMSIS-Pack/Open-CMSIS-Pack-Spec/v1.7.7/schema/PACK.xsd">
+   <vendor>Microsoft</vendor>
+   <name>AzureRTOS-LevelX</name>
+   <description>CMSIS-Pack for Azure RTOS LevelX</description>
+   <url>https://github.com/azure-rtos/cmsis-packs/</url>
+   <releases>
+      <release version="1.0.0" date="2023-03-20">
+			Initial release of Azure RTOS Level CMSIS-PACK.
+            - Based on Azure RTOS Level release v6.2.0.
+            - Included level common code.
+		</release>
+   </releases>
+   <keywords>
+      <keyword>Microsoft</keyword>
+      <keyword>Azure RTOS</keyword>
+      <keyword>LevelX</keyword>
+   </keywords>
+   <components>
+      <bundle Cbundle="LevelX" Cclass="Utility" Cversion="6.2.0">
+         <description>Azure RTOS LevelX bundle.</description>
+         <doc>../README.md</doc>
+         <component Cgroup="LevelX" Csub="common" maxInstances="1">
+            <description>Azure RTOS LevelX common</description>
+            <RTE_Components_h>#define AZURE_RTOS_LEVELX_ENABLED</RTE_Components_h>
+            <files>
+               <file category="include" name="common/inc/" />
+               <file category="source" name="common/src/fx_nand_flash_simulated_driver.c" />
+               <file category="source" name="common/src/fx_nor_flash_simulator_driver.c" />
+               <file category="source" name="common/src/lx_nand_flash_256byte_ecc_check.c" />
+               <file category="source" name="common/src/lx_nand_flash_256byte_ecc_compute.c" />
+               <file category="source" name="common/src/lx_nand_flash_block_allocate.c" />
+               <file category="source" name="common/src/lx_nand_flash_block_data_move.c" />
+               <file category="source" name="common/src/lx_nand_flash_block_find.c" />
+               <file category="source" name="common/src/lx_nand_flash_block_mapping_set.c" />
+               <file category="source" name="common/src/lx_nand_flash_block_status_set.c" />
+               <file category="source" name="common/src/lx_nand_flash_close.c" />
+               <file category="source" name="common/src/lx_nand_flash_data_page_copy.c" />
+               <file category="source" name="common/src/lx_nand_flash_defragment.c" />
+               <file category="source" name="common/src/lx_nand_flash_driver_block_erase.c" />
+               <file category="source" name="common/src/lx_nand_flash_driver_block_erased_verify.c" />
+               <file category="source" name="common/src/lx_nand_flash_driver_block_status_get.c" />
+               <file category="source" name="common/src/lx_nand_flash_driver_block_status_set.c" />
+               <file category="source" name="common/src/lx_nand_flash_driver_page_erased_verify.c" />
+               <file category="source" name="common/src/lx_nand_flash_erase_count_set.c" />
+               <file category="source" name="common/src/lx_nand_flash_extended_cache_enable.c" />
+               <file category="source" name="common/src/lx_nand_flash_format.c" />
+               <file category="source" name="common/src/lx_nand_flash_free_block_list_add.c" />
+               <file category="source" name="common/src/lx_nand_flash_initialize.c" />
+               <file category="source" name="common/src/lx_nand_flash_mapped_block_list_add.c" />
+               <file category="source" name="common/src/lx_nand_flash_mapped_block_list_get.c" />
+               <file category="source" name="common/src/lx_nand_flash_mapped_block_list_remove.c" />
+               <file category="source" name="common/src/lx_nand_flash_memory_initialize.c" />
+               <file category="source" name="common/src/lx_nand_flash_metadata_allocate.c" />
+               <file category="source" name="common/src/lx_nand_flash_metadata_build.c" />
+               <file category="source" name="common/src/lx_nand_flash_metadata_write.c" />
+               <file category="source" name="common/src/lx_nand_flash_open.c" />
+               <file category="source" name="common/src/lx_nand_flash_page_ecc_check.c" />
+               <file category="source" name="common/src/lx_nand_flash_page_ecc_compute.c" />
+               <file category="source" name="common/src/lx_nand_flash_partial_defragment.c" />
+               <file category="source" name="common/src/lx_nand_flash_sectors_read.c" />
+               <file category="source" name="common/src/lx_nand_flash_sectors_release.c" />
+               <file category="source" name="common/src/lx_nand_flash_sectors_write.c" />
+               <file category="source" name="common/src/lx_nand_flash_sector_read.c" />
+               <file category="source" name="common/src/lx_nand_flash_sector_release.c" />
+               <file category="source" name="common/src/lx_nand_flash_sector_write.c" />
+               <file category="source" name="common/src/lx_nand_flash_simulator.c" />
+               <file category="source" name="common/src/lx_nand_flash_system_error.c" />
+               <file category="source" name="common/src/lx_nor_flash_block_reclaim.c" />
+               <file category="source" name="common/src/lx_nor_flash_close.c" />
+               <file category="source" name="common/src/lx_nor_flash_defragment.c" />
+               <file category="source" name="common/src/lx_nor_flash_driver_block_erase.c" />
+               <file category="source" name="common/src/lx_nor_flash_driver_read.c" />
+               <file category="source" name="common/src/lx_nor_flash_driver_write.c" />
+               <file category="source" name="common/src/lx_nor_flash_extended_cache_enable.c" />
+               <file category="source" name="common/src/lx_nor_flash_initialize.c" />
+               <file category="source" name="common/src/lx_nor_flash_logical_sector_find.c" />
+               <file category="source" name="common/src/lx_nor_flash_next_block_to_erase_find.c" />
+               <file category="source" name="common/src/lx_nor_flash_open.c" />
+               <file category="source" name="common/src/lx_nor_flash_partial_defragment.c" />
+               <file category="source" name="common/src/lx_nor_flash_physical_sector_allocate.c" />
+               <file category="source" name="common/src/lx_nor_flash_sector_mapping_cache_invalidate.c" />
+               <file category="source" name="common/src/lx_nor_flash_sector_read.c" />
+               <file category="source" name="common/src/lx_nor_flash_sector_release.c" />
+               <file category="source" name="common/src/lx_nor_flash_sector_write.c" />
+               <file category="source" name="common/src/lx_nor_flash_simulator.c" />
+               <file category="source" name="common/src/lx_nor_flash_system_error.c" />
+            </files>
+         </component>
+      </bundle>
+   </components>
+</package>
