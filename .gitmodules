@@ -1,0 +1,18 @@
+[submodule "threadx"]
+	path = threadx
+	url = https://github.com/azure-rtos/threadx.git
+[submodule "netxduo"]
+	path = netxduo
+	url = https://github.com/azure-rtos/netxduo.git
+[submodule "filex"]
+	path = filex
+	url = https://github.com/azure-rtos/filex.git
+[submodule "guix"]
+	path = guix
+	url = https://github.com/azure-rtos/guix.git
+[submodule "usbx"]
+	path = usbx
+	url = https://github.com/azure-rtos/usbx.git
+[submodule "levelx"]
+	path = levelx
+	url = https://github.com/azure-rtos/levelx.git
