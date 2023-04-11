@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<package>
+
+    <!-- common source files directory -->
+    <common_dir>../common</common_dir>
+
+    <!-- porting files directory -->
+    <ports_dir>../ports</ports_dir>
+
+    <!-- azrtos_module_name -->
+    <azrtos_module_name>FileX</azrtos_module_name>
+
+    <!-- supported porting devices -->
+    <port_devices>
+        <port_device>cortex_m0</port_device>
+        <port_device>cortex_m3</port_device>
+        <port_device>cortex_m4</port_device>
+        <port_device>cortex_m7</port_device>
+    </port_devices> 
+
+	<vendor>Microsoft</vendor>
+	<name>AzureRTOS-FileX</name>
+	<description>CMSIS-Pack for Azure RTOS FileX</description>
+	<url>https://github.com/azure-rtos/cmsis-packs/</url>
+
+	<releases>
+		<release version="1.0.0" date="2023-03-21">
+			Initial release of Azure RTOS FileX CMSIS-PACK.
+            - Based on Azure RTOS FileX release v6.2.0.
+            - Included FileX common code.
+            - Support Cortex-M0/M3/M4/M7
+		</release>
+	</releases>
+  
+    <keywords>
+        <keyword>Microsoft</keyword>
+        <keyword>Azure RTOS</keyword>
+		<keyword>FileX</keyword>
+    </keywords>
+
+    <conditions>
+    </conditions>
+
+    <components>
+        <bundle Cbundle="FileX" Cclass="File System" Cversion="6.2.0">
+            <description>Azure RTOS FileX bundle.</description>
+            <doc>../README.md</doc>
+        </bundle>
+    </components>
+
+</package>

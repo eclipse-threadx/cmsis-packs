@@ -1,0 +1,1109 @@
+<?xml version='1.0' encoding='utf-8'?>
+<package schemaVersion="1.7.7" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Open-CMSIS-Pack/Open-CMSIS-Pack-Spec/v1.7.7/schema/PACK.xsd">
+   <vendor>Microsoft</vendor>
+   <name>AzureRTOS-USBX</name>
+   <description>CMSIS-Pack for Azure RTOS USBX</description>
+   <url>https://github.com/azure-rtos/cmsis-packs/</url>
+   <releases>
+      <release version="1.0.0" date="2023-03-20">
+			Initial release of Azure RTOS USBX CMSIS-PACK.
+            - Based on Azure RTOS USBX release v6.2.0.
+            - Included usbx common core, usbx_device_classes, usbx_host_classes, usbx_host_controllers, usbx_network, and usbx_pictbridge.
+            - Support Cortex-M0/M3/M4/M7
+            - Support Cortex-A5/A7/A8/A9/A15
+            - Support Cortex-R4/R5
+		</release>
+   </releases>
+   <keywords>
+      <keyword>Microsoft</keyword>
+      <keyword>Azure RTOS</keyword>
+      <keyword>USBX</keyword>
+   </keywords>
+   <conditions>
+      <condition id="CA5 IAR Condition">
+         <description>Cortex-A5 / IAR Compiler</description>
+         <require Tcompiler="IAR" />
+         <require Dcore="Cortex-A5" />
+      </condition>
+      <condition id="CA5 GNU Condition">
+         <description>Cortex-A5 / GNU Compiler</description>
+         <require Tcompiler="GCC" />
+         <require Dcore="Cortex-A5" />
+      </condition>
+      <condition id="CA7 IAR Condition">
+         <description>Cortex-A7 / IAR Compiler</description>
+         <require Tcompiler="IAR" />
+         <require Dcore="Cortex-A7" />
+      </condition>
+      <condition id="CA7 GNU Condition">
+         <description>Cortex-A7 / GNU Compiler</description>
+         <require Tcompiler="GCC" />
+         <require Dcore="Cortex-A7" />
+      </condition>
+      <condition id="CA8 IAR Condition">
+         <description>Cortex-A8 / IAR Compiler</description>
+         <require Tcompiler="IAR" />
+         <require Dcore="Cortex-A8" />
+      </condition>
+      <condition id="CA8 GNU Condition">
+         <description>Cortex-A8 / GNU Compiler</description>
+         <require Tcompiler="GCC" />
+         <require Dcore="Cortex-A8" />
+      </condition>
+      <condition id="CA9 IAR Condition">
+         <description>Cortex-A9 / IAR Compiler</description>
+         <require Tcompiler="IAR" />
+         <require Dcore="Cortex-A9" />
+      </condition>
+      <condition id="CA9 GNU Condition">
+         <description>Cortex-A9 / GNU Compiler</description>
+         <require Tcompiler="GCC" />
+         <require Dcore="Cortex-A9" />
+      </condition>
+      <condition id="C15 GNU Condition">
+         <description>Cortex-A15 / GNU Compiler</description>
+         <require Tcompiler="GCC" />
+         <require Dcore="Cortex-A15" />
+      </condition>
+      <condition id="CM0 IAR Condition">
+         <description>Cortex-M0 / IAR Compiler</description>
+         <require Tcompiler="IAR" />
+         <require Dcore="Cortex-M0" />
+      </condition>
+      <condition id="CM0 GNU Condition">
+         <description>Cortex-M0 / GNU Compiler</description>
+         <require Tcompiler="GCC" />
+         <require Dcore="Cortex-M0" />
+      </condition>
+      <condition id="CM3 IAR Condition">
+         <description>Cortex-M3 / IAR Compiler</description>
+         <require Tcompiler="IAR" />
+         <require Dcore="Cortex-M3" />
+      </condition>
+      <condition id="CM3 GNU Condition">
+         <description>Cortex-M3 / GNU Compiler</description>
+         <require Tcompiler="GCC" />
+         <require Dcore="Cortex-M3" />
+      </condition>
+      <condition id="CM4 IAR Condition">
+         <description>Cortex-M4 / IAR Compiler</description>
+         <require Tcompiler="IAR" />
+         <require Dcore="Cortex-M4" />
+      </condition>
+      <condition id="CM4 GNU Condition">
+         <description>Cortex-M4 / GNU Compiler</description>
+         <require Tcompiler="GCC" />
+         <require Dcore="Cortex-M4" />
+      </condition>
+      <condition id="CM7 IAR Condition">
+         <description>Cortex-M7 / IAR Compiler</description>
+         <require Tcompiler="IAR" />
+         <require Dcore="Cortex-M7" />
+      </condition>
+      <condition id="CM7 GNU Condition">
+         <description>Cortex-M7 / GNU Compiler</description>
+         <require Tcompiler="GCC" />
+         <require Dcore="Cortex-M7" />
+      </condition>
+      <condition id="CR4 IAR Condition">
+         <description>Cortex-R4 / IAR Compiler</description>
+         <require Tcompiler="IAR" />
+         <require Dcore="Cortex-R4" />
+      </condition>
+      <condition id="CR4 GNU Condition">
+         <description>Cortex-R4 / GNU Compiler</description>
+         <require Tcompiler="GCC" />
+         <require Dcore="Cortex-R4" />
+      </condition>
+      <condition id="CR5 IAR Condition">
+         <description>Cortex-R5 / IAR Compiler</description>
+         <require Tcompiler="IAR" />
+         <require Dcore="Cortex-R5" />
+      </condition>
+      <condition id="CR5 GNU Condition">
+         <description>Cortex-R5 / GNU Compiler</description>
+         <require Tcompiler="GCC" />
+         <require Dcore="Cortex-R5" />
+      </condition>
+   </conditions>
+   <components>
+      <bundle Cbundle="USBX" Cclass="USB" Cversion="6.2.0">
+         <description>Azure RTOS USBX bundle.</description>
+         <doc>../README.md</doc>
+         <component Cgroup="USBX" Csub="core" maxInstances="1">
+            <description>Azure RTOS USBX core</description>
+            <RTE_Components_h>#define AZURE_RTOS_USBX_ENABLED</RTE_Components_h>
+            <files>
+               <file category="include" condition="CA5 IAR Condition" name="ports/cortex_a5/iar/" />
+               <file category="include" condition="CA5 GNU Condition" name="ports/cortex_a5/gnu/" />
+               <file category="include" condition="CA7 IAR Condition" name="ports/cortex_a7/iar/" />
+               <file category="include" condition="CA7 GNU Condition" name="ports/cortex_a7/gnu/" />
+               <file category="include" condition="CA8 IAR Condition" name="ports/cortex_a8/iar/" />
+               <file category="include" condition="CA8 GNU Condition" name="ports/cortex_a8/gnu/" />
+               <file category="include" condition="CA9 IAR Condition" name="ports/cortex_a9/iar/" />
+               <file category="include" condition="CA9 GNU Condition" name="ports/cortex_a9/gnu/" />
+               <file category="include" condition="C15 GNU Condition" name="ports/cortex_a15/gnu/" />
+               <file category="include" condition="CM0 IAR Condition" name="ports/cortex_m0/iar/" />
+               <file category="include" condition="CM0 GNU Condition" name="ports/cortex_m0/gnu/" />
+               <file category="include" condition="CM3 IAR Condition" name="ports/cortex_m3/iar/" />
+               <file category="include" condition="CM3 GNU Condition" name="ports/cortex_m3/gnu/" />
+               <file category="include" condition="CM4 IAR Condition" name="ports/cortex_m4/iar/" />
+               <file category="include" condition="CM4 GNU Condition" name="ports/cortex_m4/gnu/" />
+               <file category="include" condition="CM7 IAR Condition" name="ports/cortex_m7/iar/" />
+               <file category="include" condition="CM7 GNU Condition" name="ports/cortex_m7/gnu/" />
+               <file category="include" condition="CR4 IAR Condition" name="ports/cortex_r4/iar/" />
+               <file category="include" condition="CR4 GNU Condition" name="ports/cortex_r4/gnu/" />
+               <file category="include" condition="CR5 IAR Condition" name="ports/cortex_r5/iar/" />
+               <file category="include" condition="CR5 GNU Condition" name="ports/cortex_r5/gnu/" />
+               <file category="include" name="common/core/inc/" />
+               <file category="source" name="common/core/src/ux_dcd_sim_slave_address_set.c" />
+               <file category="source" name="common/core/src/ux_dcd_sim_slave_endpoint_create.c" />
+               <file category="source" name="common/core/src/ux_dcd_sim_slave_endpoint_destroy.c" />
+               <file category="source" name="common/core/src/ux_dcd_sim_slave_endpoint_reset.c" />
+               <file category="source" name="common/core/src/ux_dcd_sim_slave_endpoint_stall.c" />
+               <file category="source" name="common/core/src/ux_dcd_sim_slave_endpoint_status.c" />
+               <file category="source" name="common/core/src/ux_dcd_sim_slave_frame_number_get.c" />
+               <file category="source" name="common/core/src/ux_dcd_sim_slave_function.c" />
+               <file category="source" name="common/core/src/ux_dcd_sim_slave_initialize.c" />
+               <file category="source" name="common/core/src/ux_dcd_sim_slave_initialize_complete.c" />
+               <file category="source" name="common/core/src/ux_dcd_sim_slave_state_change.c" />
+               <file category="source" name="common/core/src/ux_dcd_sim_slave_transfer_abort.c" />
+               <file category="source" name="common/core/src/ux_dcd_sim_slave_transfer_request.c" />
+               <file category="source" name="common/core/src/ux_dcd_sim_slave_transfer_run.c" />
+               <file category="source" name="common/core/src/ux_device_class_dpump_activate.c" />
+               <file category="source" name="common/core/src/ux_device_class_dpump_change.c" />
+               <file category="source" name="common/core/src/ux_device_class_dpump_deactivate.c" />
+               <file category="source" name="common/core/src/ux_device_class_dpump_entry.c" />
+               <file category="source" name="common/core/src/ux_device_class_dpump_initialize.c" />
+               <file category="source" name="common/core/src/ux_device_class_dpump_read.c" />
+               <file category="source" name="common/core/src/ux_device_class_dpump_read_run.c" />
+               <file category="source" name="common/core/src/ux_device_class_dpump_thread.c" />
+               <file category="source" name="common/core/src/ux_device_class_dpump_write.c" />
+               <file category="source" name="common/core/src/ux_device_class_dpump_write_run.c" />
+               <file category="source" name="common/core/src/ux_device_stack_alternate_setting_get.c" />
+               <file category="source" name="common/core/src/ux_device_stack_alternate_setting_set.c" />
+               <file category="source" name="common/core/src/ux_device_stack_class_register.c" />
+               <file category="source" name="common/core/src/ux_device_stack_class_unregister.c" />
+               <file category="source" name="common/core/src/ux_device_stack_clear_feature.c" />
+               <file category="source" name="common/core/src/ux_device_stack_configuration_get.c" />
+               <file category="source" name="common/core/src/ux_device_stack_configuration_set.c" />
+               <file category="source" name="common/core/src/ux_device_stack_control_request_process.c" />
+               <file category="source" name="common/core/src/ux_device_stack_descriptor_send.c" />
+               <file category="source" name="common/core/src/ux_device_stack_disconnect.c" />
+               <file category="source" name="common/core/src/ux_device_stack_endpoint_stall.c" />
+               <file category="source" name="common/core/src/ux_device_stack_get_status.c" />
+               <file category="source" name="common/core/src/ux_device_stack_host_wakeup.c" />
+               <file category="source" name="common/core/src/ux_device_stack_initialize.c" />
+               <file category="source" name="common/core/src/ux_device_stack_interface_delete.c" />
+               <file category="source" name="common/core/src/ux_device_stack_interface_get.c" />
+               <file category="source" name="common/core/src/ux_device_stack_interface_set.c" />
+               <file category="source" name="common/core/src/ux_device_stack_interface_start.c" />
+               <file category="source" name="common/core/src/ux_device_stack_microsoft_extension_register.c" />
+               <file category="source" name="common/core/src/ux_device_stack_set_feature.c" />
+               <file category="source" name="common/core/src/ux_device_stack_tasks_run.c" />
+               <file category="source" name="common/core/src/ux_device_stack_transfer_abort.c" />
+               <file category="source" name="common/core/src/ux_device_stack_transfer_all_request_abort.c" />
+               <file category="source" name="common/core/src/ux_device_stack_transfer_request.c" />
+               <file category="source" name="common/core/src/ux_device_stack_transfer_run.c" />
+               <file category="source" name="common/core/src/ux_device_stack_uninitialize.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_asynch_queue_process.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_asynch_schedule.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_asynchronous_endpoint_create.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_asynchronous_endpoint_destroy.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_controller_disable.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_ed_obtain.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_ed_td_clean.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_endpoint_reset.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_entry.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_frame_number_get.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_frame_number_set.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_initialize.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_interrupt_endpoint_create.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_iso_queue_process.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_iso_schedule.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_isochronous_endpoint_create.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_isochronous_td_obtain.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_least_traffic_list_get.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_periodic_endpoint_destroy.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_periodic_schedule.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_periodic_tree_create.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_port_reset.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_port_status_get.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_regular_td_obtain.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_request_bulk_transfer.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_request_control_transfer.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_request_interupt_transfer.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_request_isochronous_transfer.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_request_transfer.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_timer_function.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_transaction_schedule.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_transfer_abort.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_transfer_run.c" />
+               <file category="source" name="common/core/src/ux_hcd_sim_host_uninitialize.c" />
+               <file category="source" name="common/core/src/ux_host_class_dpump_activate.c" />
+               <file category="source" name="common/core/src/ux_host_class_dpump_configure.c" />
+               <file category="source" name="common/core/src/ux_host_class_dpump_deactivate.c" />
+               <file category="source" name="common/core/src/ux_host_class_dpump_endpoints_get.c" />
+               <file category="source" name="common/core/src/ux_host_class_dpump_entry.c" />
+               <file category="source" name="common/core/src/ux_host_class_dpump_ioctl.c" />
+               <file category="source" name="common/core/src/ux_host_class_dpump_read.c" />
+               <file category="source" name="common/core/src/ux_host_class_dpump_write.c" />
+               <file category="source" name="common/core/src/ux_host_stack_bandwidth_check.c" />
+               <file category="source" name="common/core/src/ux_host_stack_bandwidth_claim.c" />
+               <file category="source" name="common/core/src/ux_host_stack_bandwidth_release.c" />
+               <file category="source" name="common/core/src/ux_host_stack_class_call.c" />
+               <file category="source" name="common/core/src/ux_host_stack_class_device_scan.c" />
+               <file category="source" name="common/core/src/ux_host_stack_class_get.c" />
+               <file category="source" name="common/core/src/ux_host_stack_class_instance_create.c" />
+               <file category="source" name="common/core/src/ux_host_stack_class_instance_destroy.c" />
+               <file category="source" name="common/core/src/ux_host_stack_class_instance_get.c" />
+               <file category="source" name="common/core/src/ux_host_stack_class_instance_verify.c" />
+               <file category="source" name="common/core/src/ux_host_stack_class_interface_scan.c" />
+               <file category="source" name="common/core/src/ux_host_stack_class_register.c" />
+               <file category="source" name="common/core/src/ux_host_stack_class_unregister.c" />
+               <file category="source" name="common/core/src/ux_host_stack_configuration_descriptor_parse.c" />
+               <file category="source" name="common/core/src/ux_host_stack_configuration_enumerate.c" />
+               <file category="source" name="common/core/src/ux_host_stack_configuration_instance_create.c" />
+               <file category="source" name="common/core/src/ux_host_stack_configuration_instance_delete.c" />
+               <file category="source" name="common/core/src/ux_host_stack_configuration_interface_get.c" />
+               <file category="source" name="common/core/src/ux_host_stack_configuration_interface_scan.c" />
+               <file category="source" name="common/core/src/ux_host_stack_configuration_set.c" />
+               <file category="source" name="common/core/src/ux_host_stack_delay_ms.c" />
+               <file category="source" name="common/core/src/ux_host_stack_device_address_set.c" />
+               <file category="source" name="common/core/src/ux_host_stack_device_configuration_activate.c" />
+               <file category="source" name="common/core/src/ux_host_stack_device_configuration_deactivate.c" />
+               <file category="source" name="common/core/src/ux_host_stack_device_configuration_get.c" />
+               <file category="source" name="common/core/src/ux_host_stack_device_configuration_reset.c" />
+               <file category="source" name="common/core/src/ux_host_stack_device_configuration_select.c" />
+               <file category="source" name="common/core/src/ux_host_stack_device_descriptor_read.c" />
+               <file category="source" name="common/core/src/ux_host_stack_device_get.c" />
+               <file category="source" name="common/core/src/ux_host_stack_device_string_get.c" />
+               <file category="source" name="common/core/src/ux_host_stack_device_remove.c" />
+               <file category="source" name="common/core/src/ux_host_stack_device_resources_free.c" />
+               <file category="source" name="common/core/src/ux_host_stack_endpoint_instance_create.c" />
+               <file category="source" name="common/core/src/ux_host_stack_endpoint_instance_delete.c" />
+               <file category="source" name="common/core/src/ux_host_stack_endpoint_reset.c" />
+               <file category="source" name="common/core/src/ux_host_stack_endpoint_transfer_abort.c" />
+               <file category="source" name="common/core/src/ux_host_stack_enum_thread_entry.c" />
+               <file category="source" name="common/core/src/ux_host_stack_hcd_register.c" />
+               <file category="source" name="common/core/src/ux_host_stack_hcd_thread_entry.c" />
+               <file category="source" name="common/core/src/ux_host_stack_hcd_transfer_request.c" />
+               <file category="source" name="common/core/src/ux_host_stack_hcd_unregister.c" />
+               <file category="source" name="common/core/src/ux_host_stack_hnp_polling_thread_entry.c" />
+               <file category="source" name="common/core/src/ux_host_stack_initialize.c" />
+               <file category="source" name="common/core/src/ux_host_stack_interface_endpoint_get.c" />
+               <file category="source" name="common/core/src/ux_host_stack_interface_instance_create.c" />
+               <file category="source" name="common/core/src/ux_host_stack_interface_instance_delete.c" />
+               <file category="source" name="common/core/src/ux_host_stack_interface_set.c" />
+               <file category="source" name="common/core/src/ux_host_stack_interface_setting_select.c" />
+               <file category="source" name="common/core/src/ux_host_stack_interfaces_scan.c" />
+               <file category="source" name="common/core/src/ux_host_stack_new_configuration_create.c" />
+               <file category="source" name="common/core/src/ux_host_stack_new_device_create.c" />
+               <file category="source" name="common/core/src/ux_host_stack_new_device_get.c" />
+               <file category="source" name="common/core/src/ux_host_stack_new_endpoint_create.c" />
+               <file category="source" name="common/core/src/ux_host_stack_new_interface_create.c" />
+               <file category="source" name="common/core/src/ux_host_stack_rh_change_process.c" />
+               <file category="source" name="common/core/src/ux_host_stack_rh_device_extraction.c" />
+               <file category="source" name="common/core/src/ux_host_stack_rh_device_insertion.c" />
+               <file category="source" name="common/core/src/ux_host_stack_role_swap.c" />
+               <file category="source" name="common/core/src/ux_host_stack_tasks_run.c" />
+               <file category="source" name="common/core/src/ux_host_stack_transfer_request.c" />
+               <file category="source" name="common/core/src/ux_host_stack_transfer_request_abort.c" />
+               <file category="source" name="common/core/src/ux_host_stack_transfer_run.c" />
+               <file category="source" name="common/core/src/ux_host_stack_uninitialize.c" />
+               <file category="source" name="common/core/src/ux_system_error_handler.c" />
+               <file category="source" name="common/core/src/ux_system_initialize.c" />
+               <file category="source" name="common/core/src/ux_system_tasks_run.c" />
+               <file category="source" name="common/core/src/ux_system_uninitialize.c" />
+               <file category="source" name="common/core/src/ux_trace_event_insert.c" />
+               <file category="source" name="common/core/src/ux_trace_event_update.c" />
+               <file category="source" name="common/core/src/ux_trace_object_register.c" />
+               <file category="source" name="common/core/src/ux_trace_object_unregister.c" />
+               <file category="source" name="common/core/src/ux_utility_debug_callback_register.c" />
+               <file category="source" name="common/core/src/ux_utility_debug_log.c" />
+               <file category="source" name="common/core/src/ux_utility_delay_ms.c" />
+               <file category="source" name="common/core/src/ux_utility_descriptor_pack.c" />
+               <file category="source" name="common/core/src/ux_utility_descriptor_parse.c" />
+               <file category="source" name="common/core/src/ux_utility_error_callback_register.c" />
+               <file category="source" name="common/core/src/ux_utility_event_flags_create.c" />
+               <file category="source" name="common/core/src/ux_utility_event_flags_delete.c" />
+               <file category="source" name="common/core/src/ux_utility_event_flags_get.c" />
+               <file category="source" name="common/core/src/ux_utility_event_flags_set.c" />
+               <file category="source" name="common/core/src/ux_utility_long_get.c" />
+               <file category="source" name="common/core/src/ux_utility_long_get_big_endian.c" />
+               <file category="source" name="common/core/src/ux_utility_long_put.c" />
+               <file category="source" name="common/core/src/ux_utility_long_put_big_endian.c" />
+               <file category="source" name="common/core/src/ux_utility_memory_allocate.c" />
+               <file category="source" name="common/core/src/ux_utility_memory_allocate_add_safe.c" />
+               <file category="source" name="common/core/src/ux_utility_memory_allocate_mulc_safe.c" />
+               <file category="source" name="common/core/src/ux_utility_memory_allocate_mulv_safe.c" />
+               <file category="source" name="common/core/src/ux_utility_memory_compare.c" />
+               <file category="source" name="common/core/src/ux_utility_memory_copy.c" />
+               <file category="source" name="common/core/src/ux_utility_memory_free.c" />
+               <file category="source" name="common/core/src/ux_utility_memory_free_block_best_get.c" />
+               <file category="source" name="common/core/src/ux_utility_memory_set.c" />
+               <file category="source" name="common/core/src/ux_utility_mutex_create.c" />
+               <file category="source" name="common/core/src/ux_utility_mutex_delete.c" />
+               <file category="source" name="common/core/src/ux_utility_mutex_off.c" />
+               <file category="source" name="common/core/src/ux_utility_mutex_on.c" />
+               <file category="source" name="common/core/src/ux_utility_pci_class_scan.c" />
+               <file category="source" name="common/core/src/ux_utility_pci_read.c" />
+               <file category="source" name="common/core/src/ux_utility_pci_write.c" />
+               <file category="source" name="common/core/src/ux_utility_physical_address.c" />
+               <file category="source" name="common/core/src/ux_utility_semaphore_create.c" />
+               <file category="source" name="common/core/src/ux_utility_semaphore_delete.c" />
+               <file category="source" name="common/core/src/ux_utility_semaphore_get.c" />
+               <file category="source" name="common/core/src/ux_utility_semaphore_put.c" />
+               <file category="source" name="common/core/src/ux_utility_set_interrupt_handler.c" />
+               <file category="source" name="common/core/src/ux_utility_short_get.c" />
+               <file category="source" name="common/core/src/ux_utility_short_get_big_endian.c" />
+               <file category="source" name="common/core/src/ux_utility_short_put.c" />
+               <file category="source" name="common/core/src/ux_utility_short_put_big_endian.c" />
+               <file category="source" name="common/core/src/ux_utility_string_length_check.c" />
+               <file category="source" name="common/core/src/ux_utility_string_length_get.c" />
+               <file category="source" name="common/core/src/ux_utility_string_to_unicode.c" />
+               <file category="source" name="common/core/src/ux_utility_thread_create.c" />
+               <file category="source" name="common/core/src/ux_utility_thread_delete.c" />
+               <file category="source" name="common/core/src/ux_utility_thread_identify.c" />
+               <file category="source" name="common/core/src/ux_utility_thread_relinquish.c" />
+               <file category="source" name="common/core/src/ux_utility_thread_resume.c" />
+               <file category="source" name="common/core/src/ux_utility_thread_schedule_other.c" />
+               <file category="source" name="common/core/src/ux_utility_thread_sleep.c" />
+               <file category="source" name="common/core/src/ux_utility_thread_suspend.c" />
+               <file category="source" name="common/core/src/ux_utility_timer_create.c" />
+               <file category="source" name="common/core/src/ux_utility_timer_delete.c" />
+               <file category="source" name="common/core/src/ux_utility_unicode_to_string.c" />
+               <file category="source" name="common/core/src/ux_utility_virtual_address.c" />
+            </files>
+         </component>
+         <component Cgroup="USBX" Csub="usbx_device_classes" maxInstances="1">
+            <description>Azure RTOS USBX usbx_device_classes</description>
+            <RTE_Components_h>#define AZURE_RTOS_USBX_DEVICE_CLASSES_ENABLED</RTE_Components_h>
+            <files>
+               <file category="include" name="common/usbx_device_classes/inc/" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio10_control_process.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio20_control_process.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_activate.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_change.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_control_request.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_deactivate.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_entry.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_feedback_get.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_feedback_set.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_feedback_thread_entry.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_feedback_task_function.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_frame_write.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_initialize.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_interrupt_send.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_interrupt_thread_entry.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_interrupt_task_function.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_ioctl.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_read_frame_free.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_read_frame_get.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_read_thread_entry.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_read_task_function.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_reception_start.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_sample_read16.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_sample_read24.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_sample_read32.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_sample_read8.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_speed_get.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_stream_get.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_transmission_start.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_unitialize.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_write_frame_commit.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_write_frame_get.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_write_thread_entry.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_write_task_function.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_audio_tasks_run.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_ccid_activate.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_ccid_auto_seq_done.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_ccid_auto_seq_start.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_ccid_control_abort.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_ccid_control_request.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_ccid_deactivate.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_ccid_entry.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_ccid_hardware_error.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_ccid_icc_insert.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_ccid_icc_remove.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_ccid_initialize.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_ccid_notify_task_run.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_ccid_notify_thread_entry.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_ccid_response.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_ccid_runner_task_run.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_ccid_runner_thread_entry.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_ccid_tasks_run.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_ccid_thread_entry.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_ccid_time_extension.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_ccid_uninitialize.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_acm_activate.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_acm_bulkin_thread.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_acm_bulkout_thread.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_acm_control_request.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_acm_deactivate.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_acm_entry.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_acm_initialize.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_acm_ioctl.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_acm_read.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_acm_read_run.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_acm_tasks_run.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_acm_unitialize.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_acm_write.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_acm_write_run.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_acm_write_with_callback.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_ecm_activate.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_ecm_bulkin_thread.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_ecm_bulkout_thread.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_ecm_change.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_ecm_control_request.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_ecm_deactivate.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_ecm_entry.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_ecm_initialize.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_ecm_interrupt_thread.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_ecm_uninitialize.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_cdc_ecm_write.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_dfu_activate.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_dfu_control_request.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_dfu_deactivate.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_dfu_entry.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_dfu_initialize.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_dfu_state_get.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_dfu_state_sync.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_dfu_tasks_run.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_dfu_thread.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_hid_activate.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_hid_control_request.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_hid_deactivate.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_hid_descriptor_send.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_hid_entry.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_hid_event_get.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_hid_event_set.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_hid_initialize.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_hid_interrupt_thread.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_hid_read.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_hid_read_run.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_hid_receiver_event_free.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_hid_receiver_event_get.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_hid_receiver_initialize.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_hid_receiver_tasks_run.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_hid_receiver_thread.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_hid_receiver_uninitialize.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_hid_report_get.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_hid_report_set.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_hid_tasks_run.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_hid_uninitialize.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_activate.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_control_request.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_data.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_deactivate.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_device_info_send.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_device_prop_desc_get.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_device_prop_value_get.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_device_prop_value_set.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_device_reset.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_entry.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_event_get.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_event_set.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_initialize.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_interrupt_thread.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_object_add.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_object_data_get.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_object_data_send.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_object_delete.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_object_handles_send.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_object_info_get.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_object_info_send.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_object_prop_desc_get.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_object_prop_value_get.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_object_prop_value_set.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_object_props_supported_get.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_object_references_get.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_object_references_set.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_objects_number_send.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_partial_object_data_get.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_response_send.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_storage_format.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_storage_id_send.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_storage_info_get.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_pima_thread.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_printer_activate.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_printer_control_request.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_printer_deactivate.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_printer_entry.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_printer_initialize.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_printer_ioctl.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_printer_read.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_printer_read_run.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_printer_soft_reset.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_printer_uninitialize.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_printer_write.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_printer_write_run.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_rndis_activate.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_rndis_bulkin_thread.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_rndis_bulkout_thread.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_rndis_control_request.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_rndis_deactivate.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_rndis_entry.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_rndis_initialize.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_rndis_interrupt_thread.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_rndis_msg_initialize.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_rndis_msg_keep_alive.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_rndis_msg_query.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_rndis_msg_reset.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_rndis_msg_set.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_rndis_write.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_activate.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_control_request.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_csw_send.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_deactivate.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_entry.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_format.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_get_configuration.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_get_performance.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_get_status_notification.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_initialize.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_inquiry.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_mode_select.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_mode_sense.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_prevent_allow_media_removal.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_read.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_read_capacity.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_read_disk_information.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_read_dvd_structure.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_read_format_capacity.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_read_toc.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_report_key.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_request_sense.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_start_stop.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_synchronize_cache.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_tasks_run.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_test_ready.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_thread.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_uninitialize.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_verify.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_storage_write.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_video_activate.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_video_change.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_video_control_request.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_video_deactivate.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_video_entry.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_video_initialize.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_video_ioctl.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_video_max_payload_get.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_video_read_payload_free.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_video_read_payload_get.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_video_read_task_function.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_video_read_thread_entry.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_video_reception_start.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_video_stream_get.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_video_tasks_run.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_video_transmission_start.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_video_uninitialize.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_video_write_payload_commit.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_video_write_payload_get.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_video_write_task_function.c" />
+               <file category="source" name="common/usbx_device_classes/src/ux_device_class_video_write_thread_entry.c" />
+            </files>
+         </component>
+         <component Cgroup="USBX" Csub="usbx_host_classes" maxInstances="1">
+            <description>Azure RTOS USBX usbx_host_classes</description>
+            <RTE_Components_h>#define AZURE_RTOS_USBX_HOST_CLASSES_ENABLED</RTE_Components_h>
+            <files>
+               <file category="include" name="common/usbx_host_classes/inc/" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_asix_activate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_asix_configure.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_asix_deactivate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_asix_endpoints_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_asix_entry.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_asix_interrupt_notification.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_asix_read.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_asix_reception_callback.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_asix_setup.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_asix_thread.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_asix_transmission_callback.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_asix_write.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_activate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_alternate_setting_locate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_configure.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_control_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_control_request.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_control_value_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_control_value_set.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_deactivate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_descriptor_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_descriptors_parse.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_device_controls_list_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_device_type_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_endpoints_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_entity_control_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_entity_control_value_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_entity_control_value_set.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_entry.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_feedback_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_feedback_set.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_feedback_transfer_completed.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_interrupt_notification.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_interrupt_start.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_raw_sampling_parse.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_read.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_stop.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_streaming_sampling_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_streaming_sampling_set.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_streaming_terminal_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_transfer_request.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_transfer_request_completed.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_audio_write.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_acm_activate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_acm_capabilities_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_acm_command.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_acm_configure.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_acm_deactivate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_acm_endpoints_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_acm_entry.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_acm_ioctl.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_acm_read.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_acm_reception_callback.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_acm_reception_start.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_acm_reception_stop.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_acm_transfer_request_completed.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_acm_transmission_callback.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_acm_write.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_acm_write_with_callback.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_ecm_activate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_ecm_deactivate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_ecm_endpoints_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_ecm_entry.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_ecm_interrupt_notification.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_ecm_mac_address_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_ecm_thread.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_ecm_transmission_callback.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_ecm_transmit_queue_clean.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_cdc_ecm_write.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_gser_activate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_gser_command.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_gser_configure.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_gser_deactivate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_gser_endpoints_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_gser_entry.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_gser_ioctl.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_gser_read.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_gser_reception_callback.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_gser_reception_start.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_gser_reception_stop.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_gser_write.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_activate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_client_register.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_client_search.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_configure.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_deactivate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_descriptor_parse.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_entry.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_field_decompress.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_global_item_parse.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_idle_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_idle_set.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_idle_set_run.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_instance_clean.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_interrupt_endpoint_search.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_item_data_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_keyboard_activate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_keyboard_callback.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_keyboard_deactivate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_keyboard_entry.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_keyboard_ioctl.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_keyboard_key_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_keyboard_tasks_run.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_keyboard_thread.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_local_item_parse.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_main_item_parse.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_mouse_activate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_mouse_buttons_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_mouse_callback.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_mouse_deactivate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_mouse_entry.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_mouse_position_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_mouse_wheel_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_periodic_report_start.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_periodic_report_stop.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_remote_control_activate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_remote_control_callback.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_remote_control_deactivate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_remote_control_entry.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_remote_control_usage_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_report_add.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_report_callback_register.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_report_compress.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_report_decompress.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_report_descriptor_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_report_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_report_id_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_report_item_analyse.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_report_set.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_report_set_run.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_resources_free.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_tasks_run.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hid_transfer_request_completed.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hub_activate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hub_change_detect.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hub_change_process.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hub_configure.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hub_deactivate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hub_descriptor_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hub_entry.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hub_feature.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hub_hub_change_process.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hub_interrupt_endpoint_start.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hub_port_change_connection_process.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hub_port_change_enable_process.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hub_port_change_over_current_process.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hub_port_change_process.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hub_port_change_reset_process.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hub_port_change_suspend_process.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hub_port_reset.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hub_ports_power.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hub_status_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hub_tasks_run.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_hub_transfer_request_completed.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_activate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_command.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_configure.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_deactivate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_device_info_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_device_reset.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_endpoints_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_entry.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_notification.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_num_objects_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_object_close.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_object_copy.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_object_delete.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_object_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_object_handles_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_object_info_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_object_info_send.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_object_move.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_object_open.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_object_send.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_object_transfer_abort.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_read.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_request_cancel.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_session_close.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_session_open.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_storage_ids_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_storage_info_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_thumb_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_pima_write.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_printer_activate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_printer_configure.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_printer_deactivate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_printer_device_id_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_printer_endpoints_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_printer_entry.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_printer_name_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_printer_read.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_printer_soft_reset.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_printer_status_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_printer_write.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_prolific_activate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_prolific_command.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_prolific_configure.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_prolific_deactivate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_prolific_endpoints_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_prolific_entry.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_prolific_ioctl.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_prolific_read.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_prolific_reception_callback.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_prolific_reception_start.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_prolific_reception_stop.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_prolific_setup.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_prolific_transfer_request_completed.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_prolific_write.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_activate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_cbw_initialize.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_check_run.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_configure.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_deactivate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_device_initialize.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_device_reset.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_device_support_check.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_driver_entry.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_endpoints_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_entry.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_lock.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_max_lun_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_media_capacity_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_media_characteristics_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_media_check.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_media_format_capacity_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_media_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_media_lock.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_media_mount.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_media_open.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_media_protection_check.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_media_read.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_media_recovery_sense_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_media_write.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_partition_read.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_read_write_run.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_request_sense.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_sense_code_translate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_start_stop.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_tasks_run.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_thread_entry.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_transport.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_transport_bo.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_transport_cb.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_transport_cbi.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_transport_run.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_storage_unit_ready_test.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_swar_activate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_swar_configure.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_swar_deactivate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_swar_endpoints_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_swar_entry.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_swar_ioctl.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_swar_read.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_swar_reception_callback.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_swar_reception_start.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_swar_reception_stop.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_swar_write.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_activate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_alternate_setting_locate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_channel_start.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_configure.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_control_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_control_list_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_control_request.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_control_value_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_control_value_set.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_deactivate.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_descriptor_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_endpoints_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_entities_parse.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_entry.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_format_data_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_frame_data_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_frame_interval_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_frame_parameters_set.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_input_format_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_input_terminal_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_ioctl.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_max_payload_get.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_read.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_start.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_stop.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_transfer_buffer_add.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_transfer_buffers_add.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_transfer_callback_set.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_transfer_request.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_transfer_request_callback.c" />
+               <file category="source" name="common/usbx_host_classes/src/ux_host_class_video_transfer_request_completed.c" />
+            </files>
+         </component>
+         <component Cgroup="USBX" Csub="usbx_host_controllers" maxInstances="1">
+            <description>Azure RTOS USBX usbx_host_controllers</description>
+            <RTE_Components_h>#define AZURE_RTOS_USBX_HOST_CONTROLLERS_ENABLED</RTE_Components_h>
+            <files>
+               <file category="include" name="common/usbx_host_controllers/inc/" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_asynch_td_process.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_asynchronous_endpoint_create.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_asynchronous_endpoint_destroy.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_controller_disable.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_done_queue_process.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_door_bell_wait.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_ed_clean.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_ed_obtain.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_endpoint_reset.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_entry.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_frame_number_get.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_frame_number_set.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_fsisochronous_td_obtain.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_fsisochronous_tds_process.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_hsisochronous_td_obtain.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_hsisochronous_tds_process.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_initialize.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_interrupt_endpoint_create.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_interrupt_endpoint_destroy.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_interrupt_handler.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_isochronous_endpoint_create.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_isochronous_endpoint_destroy.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_least_traffic_list_get.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_next_td_clean.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_periodic_descriptor_link.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_periodic_tree_create.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_poll_rate_entry_get.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_port_disable.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_port_reset.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_port_resume.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_port_status_get.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_port_suspend.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_power_down_port.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_power_on_port.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_power_root_hubs.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_register_read.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_register_write.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_regular_td_obtain.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_request_bulk_transfer.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_request_control_transfer.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_request_interrupt_transfer.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_request_isochronous_transfer.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_request_transfer.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_request_transfer_add.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_transfer_abort.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ehci_transfer_request_process.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_asynchronous_endpoint_create.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_asynchronous_endpoint_destroy.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_controller_disable.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_done_queue_process.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_ed_obtain.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_endpoint_error_clear.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_endpoint_reset.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_entry.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_frame_number_get.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_frame_number_set.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_initialize.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_interrupt_endpoint_create.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_interrupt_handler.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_isochronous_endpoint_create.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_isochronous_td_obtain.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_least_traffic_list_get.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_next_td_clean.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_periodic_endpoint_destroy.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_periodic_tree_create.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_port_disable.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_port_enable.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_port_reset.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_port_resume.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_port_status_get.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_port_suspend.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_power_down_port.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_power_on_port.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_power_root_hubs.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_register_read.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_register_write.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_regular_td_obtain.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_request_bulk_transfer.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_request_control_transfer.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_request_interupt_transfer.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_request_isochronous_transfer.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_request_transfer.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_transfer_abort.c" />
+               <file category="source" name="common/usbx_host_controllers/src/ux_hcd_ohci_transfer_request_process.c" />
+            </files>
+         </component>
+         <component Cgroup="USBX" Csub="usbx_network" maxInstances="1">
+            <description>Azure RTOS USBX usbx_network</description>
+            <RTE_Components_h>#define AZURE_RTOS_USBX_NETWORK_ENABLED</RTE_Components_h>
+            <files>
+               <file category="include" name="common/usbx_network/inc/" />
+               <file category="source" name="common/usbx_network/src/ux_network_driver.c" />
+            </files>
+         </component>
+         <component Cgroup="USBX" Csub="usbx_pictbridge" maxInstances="1">
+            <description>Azure RTOS USBX usbx_pictbridge</description>
+            <RTE_Components_h>#define AZURE_RTOS_USBX_PICTBRIDGE_ENABLED</RTE_Components_h>
+            <files>
+               <file category="include" name="common/usbx_pictbridge/inc/" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_array_element_to_array_hexa.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_data.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpsclient_api_abortjob.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpsclient_api_capability.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpsclient_api_configure_print_service.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpsclient_api_continuejob.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpsclient_api_device_status.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpsclient_api_startjob.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpsclient_input_object_abortjob.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpsclient_input_object_configure_print_service.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpsclient_input_object_continuejob.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpsclient_input_object_get_capability.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpsclient_input_object_prepare.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpsclient_input_object_startjob.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpsclient_object_data_get.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpsclient_object_data_send.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpsclient_object_delete.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpsclient_object_handles_get.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpsclient_object_info_get.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpsclient_object_info_send.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpsclient_object_number_get.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpsclient_register_event_callback_function.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpsclient_start.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpsclient_thread.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpshost_input_object_notify_device_status.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpshost_input_object_notify_job_status.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpshost_input_object_send.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpshost_notification_callback.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpshost_object_get.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpshost_output_object_configure_print_service.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpshost_output_object_create.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpshost_output_object_get_capability.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpshost_output_object_get_device_status.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpshost_response_get.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpshost_start.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpshost_startjob.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_dpshost_thread.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_element_to_decimal.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_element_to_hexa.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_hexa_to_decimal_string.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_hexa_to_element.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_hexa_to_major_minor.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_object_parse.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_output_object_tag_line_add.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_tag_name_get.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_tag_name_scan.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_getcapability_capability_layouts.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_getcapability_capability_papertypes.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_notifydevicestatus_capabilitychanged.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_notifydevicestatus_disconnectenable.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_notifydevicestatus_dpsprintservicestatus.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_notifydevicestatus_errorreason.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_notifydevicestatus_errorstatus.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_notifydevicestatus_jobendreason.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_notifydevicestatus_newjobok.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_startjob.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_startjob_jobconfig_cropping.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_startjob_jobconfig_dateprint.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_startjob_jobconfig_filenameprint.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_startjob_jobconfig_filetype.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_startjob_jobconfig_fixedsize.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_startjob_jobconfig_imageoptimize.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_startjob_jobconfig_layout.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_startjob_jobconfig_papersize.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_startjob_jobconfig_papertype.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_startjob_jobconfig_quality.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_startjob_printinfo.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_startjob_printinfo_copies.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_startjob_printinfo_copyid.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_startjob_printinfo_croppingarea.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_startjob_printinfo_date.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_startjob_printinfo_fileid.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_startjob_printinfo_filename.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_startjob_printinfo_filepath.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_input_startjob_printinfo_prtid.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_null.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_output_getcapability_capability_croppings.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_output_getcapability_capability_dateprints.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_output_getcapability_capability_filenameprints.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_output_getcapability_capability_filetypes.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_output_getcapability_capability_fixedsizes.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_output_getcapability_capability_imageoptimizes.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_output_getcapability_capability_layouts.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_output_getcapability_capability_papersizes.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_output_getcapability_capability_papertypes.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_output_getcapability_capability_qualities.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_output_getdevicestatus_capabilitychanged.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_output_getdevicestatus_disconnectenable.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_output_getdevicestatus_dpsprintservicestatus.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_output_getdevicestatus_errorreason.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_output_getdevicestatus_errorstatus.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_output_getdevicestatus_jobendreason.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_output_getdevicestatus_newjobok.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_output_result.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_root_dps.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_root_input.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_root_output.c" />
+               <file category="source" name="common/usbx_pictbridge/src/ux_pictbridge_xml_function_root_xml.c" />
+            </files>
+         </component>
+      </bundle>
+   </components>
+</package>

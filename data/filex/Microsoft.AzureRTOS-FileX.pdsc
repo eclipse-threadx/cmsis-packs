@@ -1,0 +1,296 @@
+<?xml version='1.0' encoding='utf-8'?>
+<package schemaVersion="1.7.7" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="https://raw.githubusercontent.com/Open-CMSIS-Pack/Open-CMSIS-Pack-Spec/v1.7.7/schema/PACK.xsd">
+   <vendor>Microsoft</vendor>
+   <name>AzureRTOS-FileX</name>
+   <description>CMSIS-Pack for Azure RTOS FileX</description>
+   <url>https://github.com/azure-rtos/cmsis-packs/</url>
+   <releases>
+      <release version="1.0.0" date="2023-03-21">
+			Initial release of Azure RTOS FileX CMSIS-PACK.
+            - Based on Azure RTOS FileX release v6.2.0.
+            - Included FileX common code.
+            - Support Cortex-M0/M3/M4/M7
+		</release>
+   </releases>
+   <keywords>
+      <keyword>Microsoft</keyword>
+      <keyword>Azure RTOS</keyword>
+      <keyword>FileX</keyword>
+   </keywords>
+   <conditions>
+      <condition id="CM0 GNU Condition">
+         <description>Cortex-M0 / GNU Compiler</description>
+         <require Tcompiler="GCC" />
+         <require Dcore="Cortex-M0" />
+      </condition>
+      <condition id="CM3 GNU Condition">
+         <description>Cortex-M3 / GNU Compiler</description>
+         <require Tcompiler="GCC" />
+         <require Dcore="Cortex-M3" />
+      </condition>
+      <condition id="CM4 GNU Condition">
+         <description>Cortex-M4 / GNU Compiler</description>
+         <require Tcompiler="GCC" />
+         <require Dcore="Cortex-M4" />
+      </condition>
+      <condition id="CM7 GNU Condition">
+         <description>Cortex-M7 / GNU Compiler</description>
+         <require Tcompiler="GCC" />
+         <require Dcore="Cortex-M7" />
+      </condition>
+   </conditions>
+   <components>
+      <bundle Cbundle="FileX" Cclass="File System" Cversion="6.2.0">
+         <description>Azure RTOS FileX bundle.</description>
+         <doc>../README.md</doc>
+         <component Cgroup="FileX" Csub="common" maxInstances="1">
+            <description>Azure RTOS FileX common</description>
+            <RTE_Components_h>#define AZURE_RTOS_FILEX_ENABLED</RTE_Components_h>
+            <files>
+               <file category="include" condition="CM0 GNU Condition" name="ports/cortex_m0/gnu/" />
+               <file category="include" condition="CM3 GNU Condition" name="ports/cortex_m3/gnu/" />
+               <file category="include" condition="CM4 GNU Condition" name="ports/cortex_m4/gnu/" />
+               <file category="include" condition="CM7 GNU Condition" name="ports/cortex_m7/gnu/" />
+               <file category="include" name="common/inc/" />
+               <file category="source" name="common/src/fx_directory_attributes_read.c" />
+               <file category="source" name="common/src/fx_directory_attributes_set.c" />
+               <file category="source" name="common/src/fx_directory_create.c" />
+               <file category="source" name="common/src/fx_directory_default_get.c" />
+               <file category="source" name="common/src/fx_directory_default_get_copy.c" />
+               <file category="source" name="common/src/fx_directory_default_set.c" />
+               <file category="source" name="common/src/fx_directory_delete.c" />
+               <file category="source" name="common/src/fx_directory_entry_read.c" />
+               <file category="source" name="common/src/fx_directory_entry_write.c" />
+               <file category="source" name="common/src/fx_directory_exFAT_entry_read.c" />
+               <file category="source" name="common/src/fx_directory_exFAT_entry_write.c" />
+               <file category="source" name="common/src/fx_directory_exFAT_free_search.c" />
+               <file category="source" name="common/src/fx_directory_exFAT_unicode_entry_write.c" />
+               <file category="source" name="common/src/fx_directory_first_entry_find.c" />
+               <file category="source" name="common/src/fx_directory_first_full_entry_find.c" />
+               <file category="source" name="common/src/fx_directory_free_search.c" />
+               <file category="source" name="common/src/fx_directory_information_get.c" />
+               <file category="source" name="common/src/fx_directory_local_path_clear.c" />
+               <file category="source" name="common/src/fx_directory_local_path_get.c" />
+               <file category="source" name="common/src/fx_directory_local_path_get_copy.c" />
+               <file category="source" name="common/src/fx_directory_local_path_restore.c" />
+               <file category="source" name="common/src/fx_directory_local_path_set.c" />
+               <file category="source" name="common/src/fx_directory_long_name_get.c" />
+               <file category="source" name="common/src/fx_directory_long_name_get_extended.c" />
+               <file category="source" name="common/src/fx_directory_name_extract.c" />
+               <file category="source" name="common/src/fx_directory_name_test.c" />
+               <file category="source" name="common/src/fx_directory_next_entry_find.c" />
+               <file category="source" name="common/src/fx_directory_next_full_entry_find.c" />
+               <file category="source" name="common/src/fx_directory_rename.c" />
+               <file category="source" name="common/src/fx_directory_search.c" />
+               <file category="source" name="common/src/fx_directory_short_name_get.c" />
+               <file category="source" name="common/src/fx_directory_short_name_get_extended.c" />
+               <file category="source" name="common/src/fx_fault_tolerant_add_FAT_log.c" />
+               <file category="source" name="common/src/fx_fault_tolerant_add_bitmap_log.c" />
+               <file category="source" name="common/src/fx_fault_tolerant_add_checksum_log.c" />
+               <file category="source" name="common/src/fx_fault_tolerant_add_dir_log.c" />
+               <file category="source" name="common/src/fx_fault_tolerant_apply_logs.c" />
+               <file category="source" name="common/src/fx_fault_tolerant_calculate_checksum.c" />
+               <file category="source" name="common/src/fx_fault_tolerant_cleanup_FAT_chain.c" />
+               <file category="source" name="common/src/fx_fault_tolerant_create_log_file.c" />
+               <file category="source" name="common/src/fx_fault_tolerant_enable.c" />
+               <file category="source" name="common/src/fx_fault_tolerant_read_FAT.c" />
+               <file category="source" name="common/src/fx_fault_tolerant_read_directory_sector.c" />
+               <file category="source" name="common/src/fx_fault_tolerant_read_log_file.c" />
+               <file category="source" name="common/src/fx_fault_tolerant_recover.c" />
+               <file category="source" name="common/src/fx_fault_tolerant_reset_log_file.c" />
+               <file category="source" name="common/src/fx_fault_tolerant_set_FAT_chain.c" />
+               <file category="source" name="common/src/fx_fault_tolerant_transaction_end.c" />
+               <file category="source" name="common/src/fx_fault_tolerant_transaction_fail.c" />
+               <file category="source" name="common/src/fx_fault_tolerant_transaction_start.c" />
+               <file category="source" name="common/src/fx_fault_tolerant_write_log_file.c" />
+               <file category="source" name="common/src/fx_file_allocate.c" />
+               <file category="source" name="common/src/fx_file_attributes_read.c" />
+               <file category="source" name="common/src/fx_file_attributes_set.c" />
+               <file category="source" name="common/src/fx_file_best_effort_allocate.c" />
+               <file category="source" name="common/src/fx_file_close.c" />
+               <file category="source" name="common/src/fx_file_create.c" />
+               <file category="source" name="common/src/fx_file_date_time_set.c" />
+               <file category="source" name="common/src/fx_file_delete.c" />
+               <file category="source" name="common/src/fx_file_extended_allocate.c" />
+               <file category="source" name="common/src/fx_file_extended_best_effort_allocate.c" />
+               <file category="source" name="common/src/fx_file_extended_relative_seek.c" />
+               <file category="source" name="common/src/fx_file_extended_seek.c" />
+               <file category="source" name="common/src/fx_file_extended_truncate.c" />
+               <file category="source" name="common/src/fx_file_extended_truncate_release.c" />
+               <file category="source" name="common/src/fx_file_open.c" />
+               <file category="source" name="common/src/fx_file_read.c" />
+               <file category="source" name="common/src/fx_file_relative_seek.c" />
+               <file category="source" name="common/src/fx_file_rename.c" />
+               <file category="source" name="common/src/fx_file_seek.c" />
+               <file category="source" name="common/src/fx_file_truncate.c" />
+               <file category="source" name="common/src/fx_file_truncate_release.c" />
+               <file category="source" name="common/src/fx_file_write.c" />
+               <file category="source" name="common/src/fx_file_write_notify_set.c" />
+               <file category="source" name="common/src/fx_media_abort.c" />
+               <file category="source" name="common/src/fx_media_boot_info_extract.c" />
+               <file category="source" name="common/src/fx_media_cache_invalidate.c" />
+               <file category="source" name="common/src/fx_media_check.c" />
+               <file category="source" name="common/src/fx_media_check_FAT_chain_check.c" />
+               <file category="source" name="common/src/fx_media_check_lost_cluster_check.c" />
+               <file category="source" name="common/src/fx_media_close.c" />
+               <file category="source" name="common/src/fx_media_close_notify_set.c" />
+               <file category="source" name="common/src/fx_media_exFAT_format.c" />
+               <file category="source" name="common/src/fx_media_extended_space_available.c" />
+               <file category="source" name="common/src/fx_media_flush.c" />
+               <file category="source" name="common/src/fx_media_format.c" />
+               <file category="source" name="common/src/fx_media_format_oem_name_set.c" />
+               <file category="source" name="common/src/fx_media_format_type_set.c" />
+               <file category="source" name="common/src/fx_media_format_volume_id_set.c" />
+               <file category="source" name="common/src/fx_media_open.c" />
+               <file category="source" name="common/src/fx_media_open_notify_set.c" />
+               <file category="source" name="common/src/fx_media_read.c" />
+               <file category="source" name="common/src/fx_media_space_available.c" />
+               <file category="source" name="common/src/fx_media_volume_get.c" />
+               <file category="source" name="common/src/fx_media_volume_get_extended.c" />
+               <file category="source" name="common/src/fx_media_volume_set.c" />
+               <file category="source" name="common/src/fx_media_write.c" />
+               <file category="source" name="common/src/fx_partition_offset_calculate.c" />
+               <file category="source" name="common/src/fx_ram_driver.c" />
+               <file category="source" name="common/src/fx_system_date_get.c" />
+               <file category="source" name="common/src/fx_system_date_set.c" />
+               <file category="source" name="common/src/fx_system_initialize.c" />
+               <file category="source" name="common/src/fx_system_time_get.c" />
+               <file category="source" name="common/src/fx_system_time_set.c" />
+               <file category="source" name="common/src/fx_system_timer_entry.c" />
+               <file category="source" name="common/src/fx_trace_event_insert.c" />
+               <file category="source" name="common/src/fx_trace_event_update.c" />
+               <file category="source" name="common/src/fx_trace_object_register.c" />
+               <file category="source" name="common/src/fx_trace_object_unregister.c" />
+               <file category="source" name="common/src/fx_unicode_directory_create.c" />
+               <file category="source" name="common/src/fx_unicode_directory_entry_change.c" />
+               <file category="source" name="common/src/fx_unicode_directory_entry_read.c" />
+               <file category="source" name="common/src/fx_unicode_directory_rename.c" />
+               <file category="source" name="common/src/fx_unicode_directory_search.c" />
+               <file category="source" name="common/src/fx_unicode_file_create.c" />
+               <file category="source" name="common/src/fx_unicode_file_rename.c" />
+               <file category="source" name="common/src/fx_unicode_length_get.c" />
+               <file category="source" name="common/src/fx_unicode_length_get_extended.c" />
+               <file category="source" name="common/src/fx_unicode_name_get.c" />
+               <file category="source" name="common/src/fx_unicode_name_get_extended.c" />
+               <file category="source" name="common/src/fx_unicode_short_name_get.c" />
+               <file category="source" name="common/src/fx_unicode_short_name_get_extended.c" />
+               <file category="source" name="common/src/fx_utility_16_unsigned_read.c" />
+               <file category="source" name="common/src/fx_utility_16_unsigned_write.c" />
+               <file category="source" name="common/src/fx_utility_32_unsigned_read.c" />
+               <file category="source" name="common/src/fx_utility_32_unsigned_write.c" />
+               <file category="source" name="common/src/fx_utility_64_unsigned_read.c" />
+               <file category="source" name="common/src/fx_utility_64_unsigned_write.c" />
+               <file category="source" name="common/src/fx_utility_FAT_entry_read.c" />
+               <file category="source" name="common/src/fx_utility_FAT_entry_write.c" />
+               <file category="source" name="common/src/fx_utility_FAT_flush.c" />
+               <file category="source" name="common/src/fx_utility_FAT_map_flush.c" />
+               <file category="source" name="common/src/fx_utility_FAT_sector_get.c" />
+               <file category="source" name="common/src/fx_utility_absolute_path_get.c" />
+               <file category="source" name="common/src/fx_utility_exFAT_allocate_new_cluster.c" />
+               <file category="source" name="common/src/fx_utility_exFAT_bitmap_cache_prepare.c" />
+               <file category="source" name="common/src/fx_utility_exFAT_bitmap_cache_update.c" />
+               <file category="source" name="common/src/fx_utility_exFAT_bitmap_flush.c" />
+               <file category="source" name="common/src/fx_utility_exFAT_bitmap_free_cluster_find.c" />
+               <file category="source" name="common/src/fx_utility_exFAT_bitmap_initialize.c" />
+               <file category="source" name="common/src/fx_utility_exFAT_bitmap_start_sector_get.c" />
+               <file category="source" name="common/src/fx_utility_exFAT_cluster_free.c" />
+               <file category="source" name="common/src/fx_utility_exFAT_cluster_state_get.c" />
+               <file category="source" name="common/src/fx_utility_exFAT_cluster_state_set.c" />
+               <file category="source" name="common/src/fx_utility_exFAT_geometry_check.c" />
+               <file category="source" name="common/src/fx_utility_exFAT_name_hash_get.c" />
+               <file category="source" name="common/src/fx_utility_exFAT_size_calculate.c" />
+               <file category="source" name="common/src/fx_utility_exFAT_system_area_checksum_verify.c" />
+               <file category="source" name="common/src/fx_utility_exFAT_system_area_checksum_write.c" />
+               <file category="source" name="common/src/fx_utility_exFAT_system_area_format.c" />
+               <file category="source" name="common/src/fx_utility_exFAT_system_sector_write.c" />
+               <file category="source" name="common/src/fx_utility_exFAT_unicode_name_hash_get.c" />
+               <file category="source" name="common/src/fx_utility_exFAT_upcase_table.c" />
+               <file category="source" name="common/src/fx_utility_logical_sector_cache_entry_read.c" />
+               <file category="source" name="common/src/fx_utility_logical_sector_flush.c" />
+               <file category="source" name="common/src/fx_utility_logical_sector_read.c" />
+               <file category="source" name="common/src/fx_utility_logical_sector_write.c" />
+               <file category="source" name="common/src/fx_utility_memory_copy.c" />
+               <file category="source" name="common/src/fx_utility_memory_set.c" />
+               <file category="source" name="common/src/fx_utility_string_length_get.c" />
+               <file category="source" name="common/src/fx_utility_token_length_get.c" />
+               <file category="source" name="common/src/fxe_directory_attributes_read.c" />
+               <file category="source" name="common/src/fxe_directory_attributes_set.c" />
+               <file category="source" name="common/src/fxe_directory_create.c" />
+               <file category="source" name="common/src/fxe_directory_default_get.c" />
+               <file category="source" name="common/src/fxe_directory_default_get_copy.c" />
+               <file category="source" name="common/src/fxe_directory_default_set.c" />
+               <file category="source" name="common/src/fxe_directory_delete.c" />
+               <file category="source" name="common/src/fxe_directory_first_entry_find.c" />
+               <file category="source" name="common/src/fxe_directory_first_full_entry_find.c" />
+               <file category="source" name="common/src/fxe_directory_information_get.c" />
+               <file category="source" name="common/src/fxe_directory_local_path_clear.c" />
+               <file category="source" name="common/src/fxe_directory_local_path_get.c" />
+               <file category="source" name="common/src/fxe_directory_local_path_get_copy.c" />
+               <file category="source" name="common/src/fxe_directory_local_path_restore.c" />
+               <file category="source" name="common/src/fxe_directory_local_path_set.c" />
+               <file category="source" name="common/src/fxe_directory_long_name_get.c" />
+               <file category="source" name="common/src/fxe_directory_long_name_get_extended.c" />
+               <file category="source" name="common/src/fxe_directory_name_test.c" />
+               <file category="source" name="common/src/fxe_directory_next_entry_find.c" />
+               <file category="source" name="common/src/fxe_directory_next_full_entry_find.c" />
+               <file category="source" name="common/src/fxe_directory_rename.c" />
+               <file category="source" name="common/src/fxe_directory_short_name_get.c" />
+               <file category="source" name="common/src/fxe_directory_short_name_get_extended.c" />
+               <file category="source" name="common/src/fxe_fault_tolerant_enable.c" />
+               <file category="source" name="common/src/fxe_file_allocate.c" />
+               <file category="source" name="common/src/fxe_file_attributes_read.c" />
+               <file category="source" name="common/src/fxe_file_attributes_set.c" />
+               <file category="source" name="common/src/fxe_file_best_effort_allocate.c" />
+               <file category="source" name="common/src/fxe_file_close.c" />
+               <file category="source" name="common/src/fxe_file_create.c" />
+               <file category="source" name="common/src/fxe_file_date_time_set.c" />
+               <file category="source" name="common/src/fxe_file_delete.c" />
+               <file category="source" name="common/src/fxe_file_extended_allocate.c" />
+               <file category="source" name="common/src/fxe_file_extended_best_effort_allocate.c" />
+               <file category="source" name="common/src/fxe_file_extended_relative_seek.c" />
+               <file category="source" name="common/src/fxe_file_extended_seek.c" />
+               <file category="source" name="common/src/fxe_file_extended_truncate.c" />
+               <file category="source" name="common/src/fxe_file_extended_truncate_release.c" />
+               <file category="source" name="common/src/fxe_file_open.c" />
+               <file category="source" name="common/src/fxe_file_read.c" />
+               <file category="source" name="common/src/fxe_file_relative_seek.c" />
+               <file category="source" name="common/src/fxe_file_rename.c" />
+               <file category="source" name="common/src/fxe_file_seek.c" />
+               <file category="source" name="common/src/fxe_file_truncate.c" />
+               <file category="source" name="common/src/fxe_file_truncate_release.c" />
+               <file category="source" name="common/src/fxe_file_write.c" />
+               <file category="source" name="common/src/fxe_file_write_notify_set.c" />
+               <file category="source" name="common/src/fxe_media_abort.c" />
+               <file category="source" name="common/src/fxe_media_cache_invalidate.c" />
+               <file category="source" name="common/src/fxe_media_check.c" />
+               <file category="source" name="common/src/fxe_media_close.c" />
+               <file category="source" name="common/src/fxe_media_close_notify_set.c" />
+               <file category="source" name="common/src/fxe_media_exFAT_format.c" />
+               <file category="source" name="common/src/fxe_media_extended_space_available.c" />
+               <file category="source" name="common/src/fxe_media_flush.c" />
+               <file category="source" name="common/src/fxe_media_format.c" />
+               <file category="source" name="common/src/fxe_media_open.c" />
+               <file category="source" name="common/src/fxe_media_open_notify_set.c" />
+               <file category="source" name="common/src/fxe_media_read.c" />
+               <file category="source" name="common/src/fxe_media_space_available.c" />
+               <file category="source" name="common/src/fxe_media_volume_get.c" />
+               <file category="source" name="common/src/fxe_media_volume_get_extended.c" />
+               <file category="source" name="common/src/fxe_media_volume_set.c" />
+               <file category="source" name="common/src/fxe_media_write.c" />
+               <file category="source" name="common/src/fxe_system_date_get.c" />
+               <file category="source" name="common/src/fxe_system_date_set.c" />
+               <file category="source" name="common/src/fxe_system_time_get.c" />
+               <file category="source" name="common/src/fxe_system_time_set.c" />
+               <file category="source" name="common/src/fxe_unicode_directory_create.c" />
+               <file category="source" name="common/src/fxe_unicode_directory_rename.c" />
+               <file category="source" name="common/src/fxe_unicode_file_create.c" />
+               <file category="source" name="common/src/fxe_unicode_file_rename.c" />
+               <file category="source" name="common/src/fxe_unicode_name_get.c" />
+               <file category="source" name="common/src/fxe_unicode_name_get_extended.c" />
+               <file category="source" name="common/src/fxe_unicode_short_name_get.c" />
+               <file category="source" name="common/src/fxe_unicode_short_name_get_extended.c" />
+            </files>
+         </component>
+      </bundle>
+   </components>
+</package>
