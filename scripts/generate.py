@@ -1,8 +1,29 @@
+"""
+This Python script generates cmsis-packs for Azure RTOS modules.
+
+Usage:
+--  Generate CMSIS-Packs for all Azure RTOS modules.
+    $ python /path/to/generate.py
+    $ python /path/to/generate.py -a
+
+--  Generate CMSIS-Packs for specific Azure RTOS modules.
+    $ python /path/to/generate.py -m "threadx, usbx"
+
+--  Force to (re)generate package description files(*.pdsc) before generating cmsis-pack.
+    Note: The pdsc files of filex, usbx, guix and levelx are generated automatically based on
+          their source codes and pdsc_template.xml.
+          This version doesn't supports generating pdsc for threadx and netxduo.
+          Their pdsc files are still manually updated.
+    $ python /path/to/generate.py -a -f
+    $ python /path/to/generate.py -f -m "filex, usbx"
+
+"""
 from argparse import RawTextHelpFormatter
 from argparse import ArgumentParser
 import os
-import gen_pdsc
 import shutil
+import sys
+import gen_pdsc
 
 DATA_DIR = "data"
 SCRIPTS_DIR = "scripts"
@@ -18,21 +39,30 @@ PACK_DIRS = {
 }
 
 
-def process_module(module):
+def process_module(azrtos_module_name):
+    """
+    This function generates cmsis-pack for specified Azure-RTOS module.
+    It can generate cmsis-pack from pdsc file directly if without "-f" option;
+    or it will first generate pdsc file from pdsc_template.xml if "-f" is present.
+
+    Args:
+        azrtos_module_name (string): threadx, netxduo, filex, usbx, guix, or levelx.
+
+    """
     # Construct the directory path
-    module_source_path = os.path.join(root_path, module)
-    module_data_path = os.path.join(data_path, module)
+    module_source_path = os.path.join(root_path, azrtos_module_name)
+    module_data_path = os.path.join(data_path, azrtos_module_name)
 
     if not os.path.exists(module_source_path):
         print(module_source_path + " not found!")
-        exit(1)
+        sys.exit(1)
 
     if not os.path.exists(module_data_path):
         print(module_data_path + " not found!")
-        exit(1)
+        sys.exit(1)
 
     # create the cmsis_pack_working folder at {module_source_path}/cmsis_pack
-    print("Copy data/" + module + " to " + module_source_path)
+    print("Copy data/" + azrtos_module_name + " to " + module_source_path)
     cmsis_pack_working_path = os.path.join(module_source_path + "/cmsis_pack")
     if not os.path.exists(cmsis_pack_working_path):
         os.mkdir(cmsis_pack_working_path)
@@ -46,8 +76,8 @@ def process_module(module):
             copied_folders.append(os.path.join(module_source_path, item))
 
     # if arg.f, generate pdsc file, but not for threadx or netxduo
-    if args.f and (module != "threadx" and module != "netxduo"):
-        print("Generate package description file for module: " + module)
+    if args.f and azrtos_module_name not in ("threadx", "netxduo"):
+        print("Generate package description file for module: " + azrtos_module_name)
         # process pdsc_template.xml in cmsis_pack_working_path
         shutil.copyfile(
             os.path.join(module_data_path, "pdsc_template.xml"),
@@ -72,14 +102,14 @@ def process_module(module):
 
     if copied_pdsc_file == "":
         print("Error: no pdsc file")
-        exit(1)
+        sys.exit(1)
 
     # goto module_source_path, call "./gen_pack.sh" bash there.
     os.chdir(module_source_path)
 
-    # run gen_pack.sh with argument PACK_DIRS[module]
+    # run gen_pack.sh with argument PACK_DIRS[azrtos_module_name]
     print("Call ./gen_pack.sh to generate cmsis_pack")
-    cmd = "./gen_pack.sh " + '"' + PACK_DIRS[module] + '"'
+    cmd = "./gen_pack.sh " + '"' + PACK_DIRS[azrtos_module_name] + '"'
     os.system(cmd)
 
     # copy generated cmsis-pack file to root_path
@@ -127,14 +157,14 @@ parser.add_argument(
 args = parser.parse_args()
 
 if (not args.all and not args.m) or args.all:
-    modules = "threadx, netxduo, usbx, filex, guix, levelx"
+    MODULES = "threadx, netxduo, usbx, filex, guix, levelx"
 elif args.m:
-    modules = args.m
+    MODULES = args.m
 
 print("*******************************************************************")
 if args.f:
     print("Generate package description files first, and then")
-print("Generate cmsis-packs for Azure RTOS modules: " + modules)
+print("Generate cmsis-packs for Azure RTOS modules: " + MODULES)
 print("*******************************************************************")
 
 cwd = os.getcwd()
@@ -146,7 +176,7 @@ elif os.path.exists(os.path.join(cwd, "..", DATA_DIR)):
     root_path = os.path.normpath(os.path.join(cwd, ".."))
 else:
     print("data folder not found!")
-    exit(1)
+    sys.exit(1)
 
 data_path = os.path.join(root_path, DATA_DIR)
 scripts_path = os.path.join(root_path, SCRIPTS_DIR)
@@ -154,9 +184,9 @@ print("root folder:    " + root_path)
 print("data folder:    " + data_path)
 print("scripts folder: " + scripts_path)
 
-if modules:
+if MODULES:
     # split modules into a list
-    modules = modules.replace(",", " ").split()
+    modules = MODULES.replace(",", " ").split()
     # process each module
     for module in modules:
         print("**************************************************************")

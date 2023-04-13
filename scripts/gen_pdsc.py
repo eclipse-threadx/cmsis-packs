@@ -1,15 +1,25 @@
-# Generate cmsis-pack pdsc file from pdsc_template.xml
+"""
+Generate cmsis-pack pdsc file from pdsc_template.xml
+"""
 
 import os
+import shutil
 import xml.etree.ElementTree as ET
 
+PDSC_TEMPLATE_FILE_NAME = "pdsc_template.xml"
 
-# get component from common/CMakeLists.txt
+
 def get_component_from_cmake_file(cmake_file):
+    """
+    Get component from common/CMakeLists.txt
+
+    Args:
+        cmake_file(string) : CMakeLists.txt for this azure-rtos module
+    """
     # Open the CMakeLists.txt file
     contents = ""
-    with open(cmake_file, "r") as f:
-        for line in f:
+    with open(cmake_file, "r", encoding="utf-8") as file:
+        for line in file:
             # Remove leading/trailing whitespaces
             line = line.strip()
             # Ignore comment lines or empty lines
@@ -37,12 +47,19 @@ def get_component_from_cmake_file(cmake_file):
     return subdirs
 
 
-# get file from each subfolder's CMakeLists.txt
 def get_file_from_cmake_file(cmake_file, files_element):
+    """
+    Parse CMakeLists.txt to get source file names and put into files_element
+
+    Args:
+        cmake_file(string): CMakeLists.txt to be parsed
+        files_element(Element): files elements in pdsc file
+
+    """
     # Open the CMakeLists.txt file
     contents = ""
-    with open(cmake_file, "r") as f:
-        for line in f:
+    with open(cmake_file, "r", encoding="utf-8") as file:
+        for line in file:
             # Remove leading/trailing whitespaces
             line = line.strip()
             # Ignore comment lines or empty lines
@@ -57,17 +74,14 @@ def get_file_from_cmake_file(cmake_file, files_element):
     if "target_include_directories(" in contents:
         # Extract source files from target_include_directories() directive
         start_pos = contents.find("target_include_directories(")
-        end_pos = contents.find(")", start_pos)
-        include_list = contents[start_pos +
-                                len("target_include_directories("):end_pos]
-
+        include_list = contents[start_pos + len("target_include_directories("):
+                                contents.find(")", start_pos)]
         # Parse the source files
-        incs = include_list.split("$")
         c_incs = [
-            source for source in incs
+            source for source in include_list.split("$")
             if source.endswith("inc") or source.endswith("include")
         ]
-        if len(c_incs) > 0:
+        if c_incs:
             for inc in c_incs:
                 output_str = inc.replace("{CMAKE_CURRENT_LIST_DIR}",
                                          current_dir)
@@ -81,13 +95,12 @@ def get_file_from_cmake_file(cmake_file, files_element):
     if "target_sources(" in contents:
         # Extract the source files from the target_sources() directive
         start_pos = contents.find("target_sources(")
-        end_pos = contents.find(")", start_pos)
-        source_list = contents[start_pos + len("target_sources("):end_pos]
+        source_list = contents[start_pos + len("target_sources("):
+                                contents.find(")", start_pos)]
 
         # Parse the source files
-        sources = source_list.split("$")
-        c_sources = [source for source in sources if source.endswith(".c")]
-        if len(c_sources) > 0:
+        c_sources = [source for source in source_list.split("$") if source.endswith(".c")]
+        if c_sources:
             for c_source in c_sources:
                 output_str = c_source.replace("{CMAKE_CURRENT_LIST_DIR}",
                                               current_dir)
@@ -98,9 +111,87 @@ def get_file_from_cmake_file(cmake_file, files_element):
                 file_element.set("name", output_str)
 
 
-# update component element with description, RTE_Components_h, porting files
+def update_conditions(root, port_devices, ports_dir):
+    """
+    check each ports_device and its compiler variants,
+    then add TCompiler and DCore conditions to pdsc
+
+    Args:
+        root: the root object of psdc_template.xml file
+        port_devices: supported porting devices defined in psdc_template.xml
+        ports_dir: ports_dir defined in psdc_template.xml
+
+    Returns:
+        porting_files: device and compiler specific porting files
+    """
+    # dictionary to save supported device porting files
+    # such as {"CA5 GNU Condition": "ports/cortex_a5/gnu/"}
+    porting_files = {}
+    conditions_subcomponent = root.find("conditions")
+    for device in port_devices:
+        core = "-".join([part[0].upper() + part[1:] for part in device.split("_")])
+
+        # check the subdir of ports + device
+        ports_device_dir = os.path.join(ports_dir, device)
+        if not os.path.isdir(ports_device_dir):
+            print(f"No {device} folder found in {ports_dir}")
+            os.system("pwd")
+            continue
+
+        # check the compiler variants
+        for subdir in os.listdir(ports_device_dir):
+            if subdir == "gnu":
+                compiler = "GCC"
+                condition_id = "C" + device[-2:].upper() + " GNU Condition"
+                desc = core + " / GNU Compiler"
+            elif subdir == "iar":
+                compiler = "IAR"
+                condition_id = "C" + device[-2:].upper() + " IAR Condition"
+                desc = core + " / IAR Compiler"
+            elif subdir in ("keil", "ac6"):
+                compiler = "ARMCC"
+                condition_id = "C" + device[-2:].upper() + " ARMC6 Condition"
+                desc = core + " / ARM Compiler 6"
+            elif subdir == "ac5":
+                compiler = "ARMCC"
+                condition_id = "C" + device[-2:].upper() + " ARMC5 Condition"
+                desc = core + " / ARM Compiler 5"
+            else:
+                print(f"Not supported compiler variant for {subdir}")
+                continue
+
+            porting_files[condition_id] = os.path.join(
+                                            ports_device_dir, subdir)[3:].replace("\\", "/")
+            condition_element = ET.SubElement(conditions_subcomponent,
+                                              "condition")
+            condition_element.attrib["id"] = condition_id
+            description_element = ET.SubElement(condition_element,
+                                                "description")
+            description_element.text = desc
+
+            # Create the require elements and add them to the root element
+            ET.SubElement(condition_element, "require", Tcompiler=compiler)
+            ET.SubElement(condition_element, "require", Dcore=core)
+
+    condition_subcomponent = conditions_subcomponent.findall("condition")
+    if not condition_subcomponent:
+        print("No <condition> found, remove <conditions>")
+        root.remove(conditions_subcomponent)
+
+    return porting_files
+
 def update_component(component, bundle_subcomponent, azrtos_module_name,
                      porting_files):
+    """
+    update component element with description, RTE_Components_h, porting files
+
+    Args:
+        component(string): component name
+        bundle_subcomponent: bundle subcomponent in pdsc file
+        azrtos_module_name(string): azrtos module name
+        porting_files: porting files for specific device and compiler
+
+    """
     component_element = ET.SubElement(bundle_subcomponent, "component")
     component_element.attrib["Cgroup"] = azrtos_module_name
     component_element.attrib["Csub"] = component
@@ -109,7 +200,7 @@ def update_component(component, bundle_subcomponent, azrtos_module_name,
     description_element.text = ("Azure RTOS " + azrtos_module_name
                                 + " " + component)
     rte_element = ET.SubElement(component_element, "RTE_Components_h")
-    if component == "core" or component == "common":
+    if component in ("core", "common"):
         rte_element.text = ("#define AZURE_RTOS_"
                             + azrtos_module_name.upper() + "_ENABLED")
     else:
@@ -119,7 +210,7 @@ def update_component(component, bundle_subcomponent, azrtos_module_name,
     files_element = ET.SubElement(component_element, "files")
 
     # add Cortex porting files into core or common component
-    if component == "core" or component == "common":
+    if component in ("core", "common"):
         for condition in porting_files:
             file_element = ET.SubElement(files_element, "file")
             file_element.set("category", "include")
@@ -129,36 +220,73 @@ def update_component(component, bundle_subcomponent, azrtos_module_name,
     return files_element
 
 
-PDSC_TEMPLATE_FILE_NAME = "pdsc_template.xml"
+def update_components(root, common_dir_subcomponent, azrtos_module_name, porting_files):
+    """
+    update components with component and files
+
+    Args:
+        root: the root object of psdc_template.xml file
+        common_dir_subcomponent: common_dir_subcomponent object of psdc_template.xml
+        azrtos_module_name: module name of this azure rtos component
+        porting_files: device and compiler specific porting files
+    """
+    components_subcomponent = root.find("components")
+    bundle_subcomponent = components_subcomponent.find("bundle")
+
+    cmake_file = os.path.join(common_dir_subcomponent.text, "CMakeLists.txt")
+
+    if not os.path.isfile(cmake_file):
+        print(f"No CMakeLists.txt file found in {common_dir_subcomponent.text}")
+
+    components_list = get_component_from_cmake_file(cmake_file)
+
+    if components_list:
+        for component in components_list:
+            # print(f"components {component} found in {cmake_file}")
+            files_element = update_component(component, bundle_subcomponent,
+                                             azrtos_module_name, porting_files)
+            sub_cmake_file = os.path.join(common_dir_subcomponent.text, component,
+                                          "CMakeLists.txt")
+            # add source and inc into each component
+            get_file_from_cmake_file(sub_cmake_file, files_element)
+    else:
+        # No individual components, add all files into one "common" component
+        # print(f"Add all files into one common component")
+        component = "common"
+        files_element = update_component(component, bundle_subcomponent,
+                                         azrtos_module_name, porting_files)
+        # add source and inc into each component
+        get_file_from_cmake_file(cmake_file, files_element)
 
 
 def generate_pdsc_file(module_data_path, cmsis_pack_working_path):
-    # pdsc template file name
-    pdsc_template_file = os.path.join(cmsis_pack_working_path,
-                                      PDSC_TEMPLATE_FILE_NAME)
+    """
+    generate package description file from this module's pdsc_template.xml
 
-    tree = ET.parse(pdsc_template_file)
+    Args:
+        module_data_path(string): this module's data path where the generated pdsc file is saved to.
+        cmsis_pack_working_path(string): the working path where pdsc_template.xml is located
+
+    """
+    # pdsc template file name
+    tree = ET.parse(os.path.join(cmsis_pack_working_path, PDSC_TEMPLATE_FILE_NAME))
     root = tree.getroot()
 
     # set root attributes
     root.set("schemaVersion", "1.7.7")
     root.set("xmlns:xs", "http://www.w3.org/2001/XMLSchema-instance")
     root.set(
-        "xs:noNamespaceSchemaLocation",
-        "https://raw.githubusercontent.com/Open-CMSIS-Pack/Open-CMSIS-Pack-Spec/v1.7.7/schema/PACK.xsd",
+    "xs:noNamespaceSchemaLocation",
+    "https://raw.githubusercontent.com/Open-CMSIS-Pack/Open-CMSIS-Pack-Spec/v1.7.7/schema/PACK.xsd",
     )
 
     # get common dir, porting dir, component name
     # and supported porting devices from template
     common_dir_subcomponent = root.find("common_dir")
-    common_dir = common_dir_subcomponent.text
-    # common_dir = os.path.join(module_source_path, common_dir)
-    # common_dir = os.path.normpath(common_dir)
 
     ports_dir_subcomponent = root.find("ports_dir")
     if ports_dir_subcomponent is not None:
         ports_dir = ports_dir_subcomponent.text
-        # ports_dir = os.path.join(module_source_path, ports_dir)
     else:
         ports_dir = ""
 
@@ -178,104 +306,17 @@ def generate_pdsc_file(module_data_path, cmsis_pack_working_path):
 
     # get pack vendor and name from template
     pack_vendor_subcomponent = root.find("vendor")
-    pack_vendor = pack_vendor_subcomponent.text
     pack_name_subcomponent = root.find("name")
-    pack_name = pack_name_subcomponent.text
 
     # output psdc file name
-    output_file = pack_vendor + "." + pack_name + ".pdsc"
+    output_file = pack_vendor_subcomponent.text + "." + pack_name_subcomponent.text + ".pdsc"
     output_file = os.path.join(cmsis_pack_working_path, output_file)
 
-    # dictionary to save supported device porting files
-    # such as {"CA5 GNU Condition": "ports/cortex_a5/gnu/"}
-    porting_files = {}
+    # update conditions in pdsc
+    porting_files = update_conditions(root, port_devices, ports_dir)
 
-    conditions_subcomponent = root.find("conditions")
-
-    # check each ports_device and its compiler variants,
-    # then add TCompiler and DCore conditions to pdsc
-    for device in port_devices:
-        parts = device.split("_")
-        core = "-".join([part[0].upper() + part[1:] for part in parts])
-
-        # check the subdir of ports + device
-        ports_device_dir = os.path.join(ports_dir, device)
-        if not os.path.isdir(ports_device_dir):
-            print(f"No {device} folder found in {ports_dir}")
-            os.system("pwd")
-            continue
-
-        # check the compiler variants
-        for subdir in os.listdir(ports_device_dir):
-            if subdir == "gnu":
-                compiler = "GCC"
-                id = "C" + device[-2:].upper() + " GNU Condition"
-                desc = core + " / GNU Compiler"
-            elif subdir == "iar":
-                compiler = "IAR"
-                id = "C" + device[-2:].upper() + " IAR Condition"
-                desc = core + " / IAR Compiler"
-            elif subdir == "keil" or subdir == "ac6":
-                compiler = "ARMCC"
-                id = "C" + device[-2:].upper() + " ARMC6 Condition"
-                desc = core + " / ARM Compiler 6"
-            elif subdir == "ac5":
-                compiler = "ARMCC"
-                id = "C" + device[-2:].upper() + " ARMC5 Condition"
-                desc = core + " / ARM Compiler 5"
-            else:
-                print(f"Not supported compiler variant for {subdir}")
-                continue
-
-            porting_files_dir = os.path.join(ports_device_dir, subdir)
-            porting_files_dir = porting_files_dir[3:]
-            porting_files_dir = porting_files_dir.replace("\\", "/")
-            porting_files[id] = porting_files_dir
-
-            condition_element = ET.SubElement(conditions_subcomponent,
-                                              "condition")
-            condition_element.attrib["id"] = id
-            description_element = ET.SubElement(condition_element,
-                                                "description")
-            description_element.text = desc
-
-            # Create the require elements and add them to the root element
-            ET.SubElement(condition_element, "require", Tcompiler=compiler)
-            ET.SubElement(condition_element, "require", Dcore=core)
-
-    condition_subcomponent = conditions_subcomponent.findall("condition")
-    if len(condition_subcomponent) == 0:
-        print("No <condition> found, remove <conditions>")
-        root.remove(conditions_subcomponent)
-
-    # add components to pdsc
-    components_subcomponent = root.find("components")
-    bundle_subcomponent = components_subcomponent.find("bundle")
-
-    cmake_file = os.path.join(common_dir, "CMakeLists.txt")
-
-    if not os.path.isfile(cmake_file):
-        print(f"No CMakeLists.txt file found in {common_dir}")
-
-    components_list = get_component_from_cmake_file(cmake_file)
-
-    if len(components_list):
-        for component in components_list:
-            # print(f"components {component} found in {cmake_file}")
-            files_element = update_component(component, bundle_subcomponent,
-                                             azrtos_module_name, porting_files)
-            sub_cmake_file = os.path.join(common_dir, component,
-                                          "CMakeLists.txt")
-            # add source and inc into each component
-            get_file_from_cmake_file(sub_cmake_file, files_element)
-    else:
-        # No individual components, add all files into one "common" component
-        # print(f"Add all files into one common component")
-        component = "common"
-        files_element = update_component(component, bundle_subcomponent,
-                                         azrtos_module_name, porting_files)
-        # add source and inc into each component
-        get_file_from_cmake_file(cmake_file, files_element)
+    # update components in pdsc
+    update_components(root, common_dir_subcomponent, azrtos_module_name, porting_files)
 
     tree = ET.ElementTree(root)
     ET.indent(tree, "   ")
@@ -283,6 +324,6 @@ def generate_pdsc_file(module_data_path, cmsis_pack_working_path):
                                encoding="utf-8",
                                xml_declaration=True)
 
-    cmd = "cp -f " + output_file + " " + module_data_path + "/"
-    os.system(cmd)
+    # save the generated pdsc file
+    shutil.copy(output_file, module_data_path)
     print(f"{output_file} is generated successfully")
