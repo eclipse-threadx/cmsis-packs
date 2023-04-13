@@ -9,12 +9,16 @@ jobs:
       matrix:
         python-version: ["3.9", "3.10"]
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout repo with submodules
+      uses: actions/checkout@v3
+      with:
+        submodules: 'recursive'
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
-        submodules: 'recursice'
+    
     - name: Generate cmsis-packs
       run: |
         echo setup environment and install tools.
