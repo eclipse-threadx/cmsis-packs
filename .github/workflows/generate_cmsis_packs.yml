@@ -19,9 +19,8 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     
-    - name: Generate cmsis-packs
+    - name: Setup environment and install tools
       run: |
-        echo setup environment and install tools.
         sudo apt-get update
         sudo apt-get install p7zip-full curl libxml2-utils unzip
         mkdir -p $HOME/Arm/Packs/ARM/CMSIS/5.9.0
@@ -30,7 +29,7 @@ jobs:
         rm ARM.CMSIS.5.9.0.pack
         export CMSIS_PACK_ROOT=$HOME/Arm/Packs
         export PATH=$PATH:$HOME/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Utilities/Linux64
-        pwd
-        ls -al
-        ls -al threadx
+        
+    - name: Generate cmsis-packs
+      run: |
         python3 scripts/generate.py -a -f
