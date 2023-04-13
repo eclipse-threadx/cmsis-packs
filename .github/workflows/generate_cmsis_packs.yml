@@ -1,0 +1,32 @@
+name: generate_cmsis_packs
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10"]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Setup environment and install dependencies
+      run: |
+        echo setup environment and install tools.
+        sudo apt-get update
+        sudo apt-get install p7zip-full curl libxml2-utils unzip
+        mkdir -p $HOME/Arm/Packs/ARM/CMSIS/5.9.0
+        wget https://github.com/ARM-software/CMSIS_5/releases/download/5.9.0/ARM.CMSIS.5.9.0.pack
+        unzip -q ARM.CMSIS.5.9.0.pack -d $HOME/Arm/Packs/ARM/CMSIS/5.9.0
+        rm ARM.CMSIS.5.9.0.pack
+        export CMSIS_PACK_ROOT=$HOME/Arm/Packs
+        export PATH=$PATH:$HOME/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Utilities/Linux64
+
+    - name: Generate cmsis-packs
+      run: |
+        pwd
+        python3 scripts/generate.py -a -f
