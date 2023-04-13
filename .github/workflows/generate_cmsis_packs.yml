@@ -27,8 +27,6 @@ jobs:
         wget https://github.com/ARM-software/CMSIS_5/releases/download/5.9.0/ARM.CMSIS.5.9.0.pack
         unzip -q ARM.CMSIS.5.9.0.pack -d $HOME/Arm/Packs/ARM/CMSIS/5.9.0
         rm ARM.CMSIS.5.9.0.pack
-        export CMSIS_PACK_ROOT=$HOME/Arm/Packs
-        export PATH=$PATH:$HOME/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Utilities/Linux64
         
     - name: Generate cmsis-packs
       run: |
