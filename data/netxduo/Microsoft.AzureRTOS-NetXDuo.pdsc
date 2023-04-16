@@ -5,10 +5,10 @@
 	<vendor>Microsoft</vendor>
 	<name>AzureRTOS-NetXDuo</name>
 	<description>CMSIS-Pack for Azure RTOS NetX Duo</description>
-	<url>https://github.com/azure-rtos/packs/</url>
+	<url>https://github.com/azure-rtos/cmsis-packs/</url>
 
 	<releases>
-		<release version="1.0.0" date="2023-01-22">
+		<release version="1.0.0" date="2023-04-15">
 			Initial release of Azure RTOS NetX Duo CMSIS-PACK.
             - Based on Azure RTOS NetX Duo release v6.2.0.
             - Included netxduo common code, addons, nx_secure and crypto_libraries.

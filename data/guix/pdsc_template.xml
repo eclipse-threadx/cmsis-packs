@@ -32,7 +32,7 @@
 	<url>https://github.com/azure-rtos/cmsis-packs/</url>
 
 	<releases>
-		<release version="1.0.0" date="2023-03-22">
+		<release version="1.0.0" date="2023-04-15">
 			Initial release of Azure RTOS GUIX CMSIS-PACK.
             - Based on Azure RTOS GUIX release v6.2.0.
             - Included GUIX common code.

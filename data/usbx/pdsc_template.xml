@@ -32,7 +32,7 @@
 	<url>https://github.com/azure-rtos/cmsis-packs/</url>
 
 	<releases>
-		<release version="1.0.0" date="2023-03-20">
+		<release version="1.0.0" date="2023-04-15">
 			Initial release of Azure RTOS USBX CMSIS-PACK.
             - Based on Azure RTOS USBX release v6.2.0.
             - Included usbx common core, usbx_device_classes, usbx_host_classes, usbx_host_controllers, usbx_network, and usbx_pictbridge.
