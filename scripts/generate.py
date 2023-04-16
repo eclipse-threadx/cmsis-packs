@@ -3,19 +3,18 @@ This Python script generates cmsis-packs for Azure RTOS modules.
 
 Usage:
 --  Generate CMSIS-Packs for all Azure RTOS modules.
-    $ python /path/to/generate.py
-    $ python /path/to/generate.py -a
+    $ python3 /path/to/generate.py
 
 --  Generate CMSIS-Packs for specific Azure RTOS modules.
-    $ python /path/to/generate.py -m "threadx, usbx"
+    $ python3 /path/to/generate.py -m "threadx, usbx"
 
---  Force to (re)generate package description files(*.pdsc) before generating cmsis-pack.
+--  Force to (re)generate pack description files(*.pdsc) before generating CMSIS-Packs.
     Note: The pdsc files of filex, usbx, guix and levelx are generated automatically based on
           their source codes and pdsc_template.xml.
           This version doesn't supports generating pdsc for threadx and netxduo.
           Their pdsc files are still manually updated.
-    $ python /path/to/generate.py -a -f
-    $ python /path/to/generate.py -f -m "filex, usbx"
+    $ python3 /path/to/generate.py -f
+    $ python3 /path/to/generate.py -f -m "filex, usbx"
 
 """
 from argparse import RawTextHelpFormatter
@@ -77,7 +76,7 @@ def process_module(azrtos_module_name):
 
     # if arg.f, generate pdsc file, but not for threadx or netxduo
     if args.f and azrtos_module_name not in ("threadx", "netxduo"):
-        print("Generate package description file for module: " + azrtos_module_name)
+        print("Generate pack description file for module: " + azrtos_module_name)
         # process pdsc_template.xml in cmsis_pack_working_path
         shutil.copyfile(
             os.path.join(module_data_path, "pdsc_template.xml"),
@@ -129,41 +128,39 @@ def process_module(azrtos_module_name):
 
 
 parser = ArgumentParser(
-    description="Python script to generate cmsis-packs for Azure RTOS",
+    description="Generate CMSIS-Packs for Azure RTOS modules.\n\n"
+    "Requirement: Python 3.9 or higher.\n\n"
+    "By default it generate packs for all Azure RTOS modules "
+    "using the existing pack description files (*.pdsc).\n"
+    "$ python3 ./scripts/generate.py",
     formatter_class=RawTextHelpFormatter,
 )
 
 parser.add_argument(
-    "-a",
-    "--all",
-    action="store_true",
-    help="Generate CMSIS-Packs for all Azure RTOS modules.\n"
-    "Example: python ./generate.py -a \n",
-)
-parser.add_argument(
     "-m",
     type=str,
-    help="Generate specific CMSIS-Packs for individual Azure RTOS modules, "
+    help="Generate CMSIS-Packs for specific Azure RTOS modules, "
     "their names are separated by comma. \n"
-    'Example: python ./generate.py -m "threadx, usbx" \n',
+    'Example: $ python3 ./scripts/generate.py -m "threadx, usbx" \n',
 )
 parser.add_argument(
     "-f",
     action="store_true",
-    help="Force to (re)generate package description files(*.pdsc). \n"
-    "Example: python ./generate.py -a -f \n"
-    '         python ./generate.py -f "threadx, usbx" \n',
+    help="Force to (re)generate pack description files (*.pdsc) before generating CMSIS-Packs. \n"
+    "Example: $ python3 ./scripts/generate.py -f \n"
+    '         $ python3 ./scripts/generate.py -f -m "threadx, usbx" \n',
 )
+
 args = parser.parse_args()
 
-if (not args.all and not args.m) or args.all:
-    MODULES = "threadx, netxduo, usbx, filex, guix, levelx"
-elif args.m:
+if args.m:
     MODULES = args.m
+else:
+    MODULES = "threadx, netxduo, usbx, filex, guix, levelx"
 
 print("*******************************************************************")
 if args.f:
-    print("Generate package description files first, and then")
+    print("Generate pack description files first, and then")
 print("Generate cmsis-packs for Azure RTOS modules: " + MODULES)
 print("*******************************************************************")
 

@@ -5,10 +5,10 @@
 	<vendor>Microsoft</vendor>
 	<name>AzureRTOS-ThreadX</name>
 	<description>CMSIS-Pack for Azure RTOS ThreadX</description>
-	<url>https://github.com/azure-rtos/packs/</url>
+	<url>https://github.com/azure-rtos/cmsis-packs/</url>
 
 	<releases>
-		<release version="1.0.0" date="2023-01-22">
+		<release version="1.0.0" date="2023-04-15">
 			Initial release of Azure RTOS ThreadX CMSIS-PACK.
             - Based on Azure RTOS ThreadX release v6.2.0.
             - Support Cortex-M0/M3/M4/M7/M23/M33/M55/M85
