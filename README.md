@@ -14,8 +14,10 @@ The pdsc_template.xml defines data used to generate pdsc file, including pack's 
 # Generate CMSIS-Packs on Ubuntu 20.4 or higher
 
 ## clone this reop recursively with azure-rtos as submodules
+```
     git clone --recursive https://github.com/azure-rtos/cmsis-packs.git
     cd cmsis-packs
+```
 
 ## Setup environment and install tools
 
