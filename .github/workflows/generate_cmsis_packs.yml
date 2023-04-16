@@ -32,4 +32,4 @@ jobs:
       run: |
         export CMSIS_PACK_ROOT=$HOME/Arm/Packs
         export PATH=$PATH:$HOME/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Utilities/Linux64
-        python3 scripts/generate.py -a -f
+        python3 scripts/generate.py -f
