@@ -8,8 +8,8 @@
     <!-- porting files directory -->
     <ports_dir>../ports</ports_dir>
 
-    <!-- azrtos_module_name -->
-    <azrtos_module_name>FileX</azrtos_module_name>
+    <!-- azrtos_component_name -->
+    <azrtos_component_name>FileX</azrtos_component_name>
 
     <!-- supported porting devices -->
     <port_devices>

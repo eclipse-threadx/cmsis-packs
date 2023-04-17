@@ -14,7 +14,7 @@ def get_component_from_cmake_file(cmake_file):
     Get component from common/CMakeLists.txt
 
     Args:
-        cmake_file(string) : CMakeLists.txt for this azure-rtos module
+        cmake_file(string) : CMakeLists.txt for this azure-rtos component
     """
     # Open the CMakeLists.txt file
     contents = ""
@@ -180,29 +180,29 @@ def update_conditions(root, port_devices, ports_dir):
 
     return porting_files
 
-def update_component(component, bundle_subcomponent, azrtos_module_name,
+def update_pack_component(component, bundle_subcomponent, azrtos_component_name,
                      porting_files):
     """
-    update component element with description, RTE_Components_h, porting files
+    update pack component element with description, RTE_Components_h, porting files
 
     Args:
-        component(string): component name
+        component(string): pack component name
         bundle_subcomponent: bundle subcomponent in pdsc file
-        azrtos_module_name(string): azrtos module name
+        azrtos_component_name(string): azrtos component name
         porting_files: porting files for specific device and compiler
 
     """
     component_element = ET.SubElement(bundle_subcomponent, "component")
-    component_element.attrib["Cgroup"] = azrtos_module_name
+    component_element.attrib["Cgroup"] = azrtos_component_name
     component_element.attrib["Csub"] = component
     component_element.attrib["maxInstances"] = "1"
     description_element = ET.SubElement(component_element, "description")
-    description_element.text = ("Azure RTOS " + azrtos_module_name
+    description_element.text = ("Azure RTOS " + azrtos_component_name
                                 + " " + component)
     rte_element = ET.SubElement(component_element, "RTE_Components_h")
     if component in ("core", "common"):
         rte_element.text = ("#define AZURE_RTOS_"
-                            + azrtos_module_name.upper() + "_ENABLED")
+                            + azrtos_component_name.upper() + "_ENABLED")
     else:
         rte_element.text = ("#define AZURE_RTOS_"
                             + component.upper() + "_ENABLED")
@@ -220,14 +220,14 @@ def update_component(component, bundle_subcomponent, azrtos_module_name,
     return files_element
 
 
-def update_components(root, common_dir_subcomponent, azrtos_module_name, porting_files):
+def update_pack_components(root, common_dir_subcomponent, azrtos_component_name, porting_files):
     """
-    update components with component and files
+    update pack components with component and files
 
     Args:
         root: the root object of psdc_template.xml file
         common_dir_subcomponent: common_dir_subcomponent object of psdc_template.xml
-        azrtos_module_name: module name of this azure rtos component
+        azrtos_component_name: this azure rtos component name
         porting_files: device and compiler specific porting files
     """
     components_subcomponent = root.find("components")
@@ -243,8 +243,8 @@ def update_components(root, common_dir_subcomponent, azrtos_module_name, porting
     if components_list:
         for component in components_list:
             # print(f"components {component} found in {cmake_file}")
-            files_element = update_component(component, bundle_subcomponent,
-                                             azrtos_module_name, porting_files)
+            files_element = update_pack_component(component, bundle_subcomponent,
+                                             azrtos_component_name, porting_files)
             sub_cmake_file = os.path.join(common_dir_subcomponent.text, component,
                                           "CMakeLists.txt")
             # add source and inc into each component
@@ -253,18 +253,18 @@ def update_components(root, common_dir_subcomponent, azrtos_module_name, porting
         # No individual components, add all files into one "common" component
         # print(f"Add all files into one common component")
         component = "common"
-        files_element = update_component(component, bundle_subcomponent,
-                                         azrtos_module_name, porting_files)
+        files_element = update_pack_component(component, bundle_subcomponent,
+                                         azrtos_component_name, porting_files)
         # add source and inc into each component
         get_file_from_cmake_file(cmake_file, files_element)
 
 
-def generate_pdsc_file(module_data_path, cmsis_pack_working_path):
+def generate_pdsc_file(azrtos_component_data_path, cmsis_pack_working_path):
     """
-    generate package description file from this module's pdsc_template.xml
+    generate package description file from this azrtos component's pdsc_template.xml
 
     Args:
-        module_data_path(string): this module's data path where the generated pdsc file is saved to.
+        azrtos_component_data_path(string): data path where the generated pdsc is saved to
         cmsis_pack_working_path(string): the working path where pdsc_template.xml is located
 
     """
@@ -290,15 +290,15 @@ def generate_pdsc_file(module_data_path, cmsis_pack_working_path):
     else:
         ports_dir = ""
 
-    azrtos_module_name_subcomponent = root.find("azrtos_module_name")
-    azrtos_module_name = azrtos_module_name_subcomponent.text
+    azrtos_component_name_subcomponent = root.find("azrtos_component_name")
+    azrtos_component_name = azrtos_component_name_subcomponent.text
 
     port_devices = [elem.text for elem in root.iter("port_device")]
     port_devices_subcomponent = root.find("port_devices")
 
     # remove these component from xml
     root.remove(common_dir_subcomponent)
-    root.remove(azrtos_module_name_subcomponent)
+    root.remove(azrtos_component_name_subcomponent)
     if ports_dir_subcomponent is not None:
         root.remove(ports_dir_subcomponent)
     if port_devices_subcomponent is not None:
@@ -316,7 +316,7 @@ def generate_pdsc_file(module_data_path, cmsis_pack_working_path):
     porting_files = update_conditions(root, port_devices, ports_dir)
 
     # update components in pdsc
-    update_components(root, common_dir_subcomponent, azrtos_module_name, porting_files)
+    update_pack_components(root, common_dir_subcomponent, azrtos_component_name, porting_files)
 
     tree = ET.ElementTree(root)
     ET.indent(tree, "   ")
@@ -325,5 +325,5 @@ def generate_pdsc_file(module_data_path, cmsis_pack_working_path):
                                xml_declaration=True)
 
     # save the generated pdsc file
-    shutil.copy(output_file, module_data_path)
+    shutil.copy(output_file, azrtos_component_data_path)
     print(f"{output_file} is generated successfully")
