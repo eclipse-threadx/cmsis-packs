@@ -148,7 +148,7 @@ parser.add_argument(
     action="store_true",
     help="Force to (re)generate pack description files (*.pdsc) before generating CMSIS-Packs. \n"
     "Example: $ python3 ./scripts/generate.py -f \n"
-    '         $ python3 ./scripts/generate.py -f -m "threadx, usbx" \n',
+    '         $ python3 ./scripts/generate.py -f -m "filex, usbx" \n',
 )
 
 args = parser.parse_args()
