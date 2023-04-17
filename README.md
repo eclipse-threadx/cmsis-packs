@@ -1,6 +1,6 @@
 # AzureRTOS-CMSIS-Packs
 
-This repository contains Azure RTOS CMSIS-Packs for ThreadX, NetXDuo, Filex, USBX, GUIX and Levelx.
+This repository contains Azure RTOS CMSIS-Packs for ThreadX, NetXDuo, FileX, USBX, GUIX and LevelX.
 
 It also provides the scripts, data and source codes used to generate CMSIS-Packs and pack description files.
 
@@ -9,7 +9,7 @@ Pack description files (*.pdsc) are required to generate CMSIS-Packs.
 * For FileX, USBX, GUIX and LevelX, their pack description files are generated automatically based on their source codes and a template xml file (pdsc_template.xml). 
 The pdsc_template.xml defines data used to generate pdsc file, including pack's metadata, source file and porting file dictories, supported porting devices, release info, component decription, etc.
 
-* For ThreadX and NetXDuo, their pack description files are currently manually written, but plans are in place to support automatic generation in the near future.
+* For ThreadX and NetXDuo, their pack description files are currently manually written.
 
 # Generate CMSIS-Packs on Ubuntu 20.4 or higher
 
@@ -33,7 +33,7 @@ Requirements: Python 3.9 or higher.
     export CMSIS_PACK_ROOT=$HOME/Arm/Packs
     export PATH=$PATH:$HOME/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Utilities/Linux64
 
-```        
+```
 ## Generate cmsis-packs
 ```
     # generate packs for all Azure RTOS modules using the existing pack description files (*.pdsc).
@@ -44,7 +44,7 @@ Requirements: Python 3.9 or higher.
 
     # Force to (re)generate pack description files (*.pdsc) before generating CMSIS-Packs
     python3 ./scripts/generate.py -f
-    python3 ./scripts/generate.py -f -m "threadx, usbx"
+    python3 ./scripts/generate.py -f -m "filex, usbx"
 
 ```
 ## Repository Structure
