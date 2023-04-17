@@ -5,8 +5,8 @@
     <!-- common source files directory -->
     <common_dir>../common</common_dir>
 
-    <!-- azrtos_module_name -->
-    <azrtos_module_name>LevelX</azrtos_module_name>
+    <!-- azrtos_component_name -->
+    <azrtos_component_name>LevelX</azrtos_component_name>
 
 	<vendor>Microsoft</vendor>
 	<name>AzureRTOS-LevelX</name>

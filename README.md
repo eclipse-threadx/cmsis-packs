@@ -36,10 +36,10 @@ Requirements: Python 3.9 or higher.
 ```
 ## Generate cmsis-packs
 ```
-    # generate packs for all Azure RTOS modules using the existing pack description files (*.pdsc).
+    # generate packs for all Azure RTOS system components using the existing pack description files (*.pdsc).
     python3 ./scripts/generate.py
 
-    # Generate CMSIS-Packs for specific Azure RTOS modules
+    # Generate CMSIS-Packs for specific Azure RTOS system components
     python3 ./scripts/generate.py -m "threadx, usbx"
 
     # Force to (re)generate pack description files (*.pdsc) before generating CMSIS-Packs
@@ -48,7 +48,7 @@ Requirements: Python 3.9 or higher.
 
 ```
 ## Repository Structure
-This repo add all Azure RTOS modules repo as submodules.
+This repo add all Azure RTOS system components repo as submodules.
 
 ```
 .
@@ -58,7 +58,7 @@ This repo add all Azure RTOS modules repo as submodules.
     │   ├── gen_pdsc.py                                 # python module to generate pack description file from azure-rtos source code and pdsc_template.xml
     │   └── gen_pack.sh                                 # bash script to generate cmsis-pack
     │
-    ├── data                                            # Each module's pack description file, pdsc_template.xml, and any additional files to be added to CMSIS-Pack, such as example projects
+    ├── data                                            # Each Azure RTOS system component's pdsc file, pdsc_template.xml, any additional files to be added to CMSIS-Pack, such as examples
     │   │
     │   ├── filex
     │   │   ├── Microsoft.AzureRTOS-FileX.pdsc
